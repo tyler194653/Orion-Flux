@@ -1,0 +1,13 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "python.createEnvironment.trigger": "off",
+    "php.validate.executablePath": "",
+    "terminal.external.windowsExec": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.automationProfile.windows": null,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+        }
+    }
+} 
