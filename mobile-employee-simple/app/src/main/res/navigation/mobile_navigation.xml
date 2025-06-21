@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_login">
+
+    <fragment
+        android:id="@+id/nav_workbench"
+        android:name="com.example.mobile_employee_simple.ui.workbench.WorkbenchFragment"
+        android:label="@string/menu_workbench"
+        tools:layout="@layout/fragment_workbench" />
+
+    <fragment
+        android:id="@+id/nav_camera"
+        android:name="com.example.mobile_employee_simple.ui.camera.CameraFragment"
+        android:label="@string/menu_camera"
+        tools:layout="@layout/fragment_camera" />
+
+    <fragment
+        android:id="@+id/nav_inventory"
+        android:name="com.example.mobile_employee_simple.ui.inventory.InventoryFragment"
+        android:label="@string/menu_inventory"
+        tools:layout="@layout/fragment_inventory" />
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.mobile_employee_simple.ui.auth.LoginFragment"
+        android:label="@string/menu_auth"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.mobile_employee_simple.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.mobile_employee_simple.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.mobile_employee_simple.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.mobile_employee_simple.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_user_info"
+        android:name="com.example.mobile_employee_simple.ui.user.UserInfoFragment"
+        android:label="用户信息"
+        tools:layout="@layout/fragment_user_info" />
+</navigation>

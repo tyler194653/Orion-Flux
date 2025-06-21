@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/workbench_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="工作台"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/task_list_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="任务列表 (React Native)"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/inventory_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="库存管理 (原生Android)"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/reports_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="报表 (React Native)"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp" />
+
+</LinearLayout> 
