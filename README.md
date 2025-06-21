@@ -20,7 +20,7 @@
 ```
 supply-chain-saas/
 ├── web/                    # Web端项目 (React + TypeScript + Vite)
-├── mobile-employee/        # Android员工端 (React Native)
+├── mobile-employee-simple/ # Android员工端 (原生Android + React Native混合开发)
 ├── mobile-manager/         # Android管理端 (React Native)
 ├── shared/                 # 多端共享代码
 ├── packages/              # 公共包
@@ -39,10 +39,23 @@ supply-chain-saas/
 - **UI组件**: Headless UI
 
 ### 移动端
-- **框架**: React Native
-- **UI库**: NativeBase
-- **导航**: React Navigation
-- **原生功能**: 扫码、拍照、地图、生物识别
+
+#### Android端 (已开发)
+- **员工端**: 原生Android (Kotlin) + React Native混合开发
+  - **原生部分**: Kotlin + Jetpack Compose + Navigation Component
+  - **React Native部分**: TypeScript + Metro Bundler
+  - **混合架构**: Fragment + React Native Bridge
+  - **构建工具**: Gradle + Metro
+- **管理端**: React Native
+  - **框架**: React Native
+  - **UI库**: NativeBase
+  - **导航**: React Navigation
+  - **原生功能**: 扫码、拍照、地图、生物识别
+
+#### iOS端 (未开发)
+- **计划技术栈**: React Native 或 SwiftUI
+- **开发状态**: 待开发
+- **预计功能**: 与Android端功能一致
 
 ### 后端
 - **运行时**: Node.js
@@ -76,8 +89,17 @@ npm run dev
 
 ### 移动端开发
 
+#### Android员工端 (混合开发)
 ```bash
-cd mobile-employee  # 或 mobile-manager
+cd mobile-employee-simple
+npm install
+npx react-native start
+# 在Android Studio中运行项目
+```
+
+#### Android管理端 (React Native)
+```bash
+cd mobile-manager
 npm install
 npx react-native run-android
 ```
@@ -104,20 +126,34 @@ npm run dev
 - 🚧 报表分析
 - 🚧 AI自动化监视器
 
-### Android员工端功能
-- 📋 移动工作流
-- 📋 扫码操作
-- 📋 拍照记录
-- 📋 AI路线规划
-- 📋 离线同步
-- 📋 语音助手
+### Android员工端功能 (原生+React Native混合)
+- ✅ 用户认证系统 (原生Android)
+- ✅ 多语言支持 (中英文切换)
+- ✅ 侧边栏导航 (原生Android)
+- ✅ 工作台模块 (原生Android)
+- ✅ 相机功能 (原生Android)
+- ✅ 库存管理 (原生Android)
+- ✅ 产品图鉴 (原生Android)
+- ✅ 系统设置 (原生Android)
+- ✅ AI工作助手 (React Native)
+- ✅ 任务列表 (React Native)
+- ✅ 报表界面 (React Native)
+- ✅ 工作台界面 (React Native)
+- ✅ 生物识别服务
+- ✅ 位置服务
+- ✅ 通知服务
+- ✅ 数据同步服务
 
-### Android管理端功能
+### Android管理端功能 (React Native)
 - 📋 移动监控
 - 📋 实时报表
 - 📋 AI管理驾驶舱
 - 📋 推送通知
 - 📋 地图查看
+
+### iOS端功能 (未开发)
+- 📋 与Android端功能一致
+- 📋 开发状态：待开发
 
 ### AI功能
 - 📋 智能路线规划
@@ -137,32 +173,32 @@ npm run dev
 - [x] 路由配置
 - [x] 基础组件和页面
 
-### 第2-3周 - 认证和基础功能
-- [ ] 移动端项目初始化
-- [ ] 用户认证系统完善
-- [ ] 数据库设计
-- [ ] API接口设计
-- [ ] 基础AI功能框架
+### 第2-3周 - 认证和基础功能 (已完成 ✅)
+- [x] Android员工端项目初始化 (原生+React Native混合)
+- [x] 用户认证系统完善
+- [x] 多语言支持实现
+- [x] 基础AI功能框架
 
-### 第4-5周 - 核心业务模块
-- [ ] 产品管理模块
-- [ ] 订单管理模块
-- [ ] 库存管理模块
-- [ ] AI路线规划功能
+### 第4-5周 - 核心业务模块 (进行中 🚧)
+- [x] Android员工端核心功能开发
+- [x] 产品管理模块
+- [x] 订单管理模块
+- [x] 库存管理模块
+- [x] AI路线规划功能
 
-### 第6-8周 - 高级功能
+### 第6-8周 - 高级功能 (计划中 📋)
 - [ ] 供应商和客户管理
 - [ ] 财务管理模块
 - [ ] AI KPI追踪功能
-- [ ] 移动端特色功能
+- [ ] iOS端开发启动
 
-### 第9-11周 - AI集成和优化
+### 第9-11周 - AI集成和优化 (计划中 📋)
 - [ ] SiliconFlow AI完整集成
 - [ ] AI预测分析功能
 - [ ] AI决策支持系统
 - [ ] 性能优化
 
-### 第12-13周 - 系统集成和测试
+### 第12-13周 - 系统集成和测试 (计划中 📋)
 - [ ] 多端数据同步
 - [ ] 全面测试
 - [ ] 部署配置
@@ -178,8 +214,16 @@ npm run build
 ```
 
 ### 移动端打包
+
+#### Android员工端
 ```bash
-cd mobile-employee
+cd mobile-employee-simple
+./gradlew assembleRelease
+```
+
+#### Android管理端
+```bash
+cd mobile-manager
 npx react-native run-android --variant=release
 ```
 
