@@ -10,7 +10,7 @@
         android:id="@+id/user_info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="当前用户："
+        android:text="@string/user_info_current_user"
         android:textSize="20sp"
         android:layout_marginBottom="24dp" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/permission_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="权限："
+        android:text="@string/user_info_permission"
         android:textSize="18sp" />
 
 </LinearLayout> 

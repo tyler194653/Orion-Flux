@@ -1,18 +1,116 @@
 <resources>
-    <string name="app_name">Mobile-employee-simple</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">供应链员工端</string>
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="nav_header_title">供应链</string>
+    <string name="nav_header_subtitle">employee@company.com</string>
+    <string name="nav_header_desc">导航头部</string>
+    <string name="action_settings">设置</string>
 
     <string name="menu_workbench">工作台</string>
     <string name="menu_camera">相机</string>
     <string name="menu_inventory">库存管理</string>
     <string name="menu_auth">登录</string>
     <string name="menu_settings">设置</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_home">主页</string>
+    <string name="menu_gallery">产品图鉴</string>
+
+    <!-- 登录界面 -->
+    <string name="login_title">供应链员工端</string>
+    <string name="login_username_hint">用户名</string>
+    <string name="login_password_hint">密码</string>
+    <string name="login_button">登录</string>
+    <string name="login_other_methods">其他登录方式</string>
+    <string name="login_biometric">指纹/面部识别登录</string>
+    <string name="login_qr">扫码登录</string>
+    <string name="login_employee_id">工号登录</string>
+    <string name="login_language_switch">中文/English</string>
+
+    <!-- 用户信息 -->
+    <string name="user_info">用户信息</string>
+    <string name="logout">退出登录</string>
+    <string name="logout_success">已退出登录</string>
+
+    <!-- 主页 -->
+    <string name="home_welcome">欢迎使用供应链员工端</string>
+    <string name="home_welcome_with_user">欢迎使用供应链员工端，%s</string>
+    <string name="home_workbench">工作台</string>
+    <string name="home_ai_assistant">AI助手</string>
+    <string name="default_user">用户</string>
+
+    <!-- 工作台 -->
+    <string name="workbench_title">工作台</string>
+    <string name="workbench_task_list">任务列表 (React Native)</string>
+    <string name="workbench_inventory">库存管理 (原生Android)</string>
+    <string name="workbench_reports">报表 (React Native)</string>
+    <string name="workbench_task_list_developing">任务列表功能开发中</string>
+    <string name="workbench_reports_developing">报表功能开发中</string>
+    <string name="workbench_inventory_developing">库存管理功能开发中</string>
+    <string name="workbench_login_required">请先登录</string>
+
+    <!-- 设置 -->
+    <string name="settings_title">设置</string>
+    <string name="settings_notification">通知设置</string>
+    <string name="settings_privacy">隐私设置</string>
+    <string name="settings_sync">数据同步设置</string>
+    <string name="settings_app_info">应用信息</string>
+    <string name="settings_help_feedback">帮助与反馈</string>
+    <string name="settings_about">关于应用</string>
+    <string name="settings_version">版本 %s</string>
+    <string name="settings_privacy_developing">隐私设置功能开发中</string>
+    <string name="settings_sync_developing">数据同步设置功能开发中</string>
+    <string name="settings_app_info_title">应用信息</string>
+    <string name="settings_app_info_content">应用名称: %1$s\n版本号: %2$s\n版本代码: %3$s\n包名: %4$s</string>
+    <string name="settings_ok">确定</string>
+    <string name="settings_about_title">关于应用</string>
+    <string name="settings_about_content">供应链员工端\n\n版本: %s\n\n本应用为供应链管理系统员工端，提供以下功能：\n• 工作台管理\n• 库存管理\n• 扫码功能\n• AI助手\n\n如有问题请联系技术支持。</string>
+    <string name="settings_feedback_subject">供应链员工端应用反馈</string>
+    <string name="settings_feedback_content">请在此处描述您的问题或建议：\n\n应用版本: %1$s\n设备信息: %2$s\n系统版本: Android %3$s\n\n反馈内容：\n\n</string>
+    <string name="settings_no_email_app">未找到邮件应用，请手动发送邮件到 support@supplychain.com</string>
+
+    <!-- 用户信息 -->
+    <string name="user_info_current_user">当前用户：%s</string>
+    <string name="user_info_permission">权限：普通员工（示例）</string>
+    <string name="user_info_not_logged_in">未登录</string>
+
+    <!-- 库存管理 -->
+    <string name="inventory_title">库存管理</string>
+    <string name="inventory_back">返回</string>
+    <string name="inventory_search">搜索</string>
+    <string name="inventory_scan_in">扫码入库</string>
+    <string name="inventory_scan_out">扫码出库</string>
+    <string name="inventory_check">库存盘点</string>
+    <string name="inventory_location_manage">货位管理</string>
+    <string name="inventory_refresh">刷新库存数据</string>
+    <string name="inventory_login_required">请先登录</string>
+    <string name="inventory_scan_in_prompt">扫描产品条码进行入库</string>
+    <string name="inventory_scan_out_prompt">扫描产品条码进行出库</string>
+    <string name="inventory_check_developing">库存盘点功能开发中</string>
+    <string name="inventory_location_developing">货位管理功能开发中</string>
+    <string name="inventory_search_developing">搜索功能开发中</string>
+
+    <!-- 相机页面 -->
+    <string name="camera_title">相机功能</string>
+    <string name="camera_take_photo">拍照</string>
+    <string name="camera_select_image">选择图片</string>
+    <string name="camera_scan_qr">扫描二维码</string>
+    <string name="camera_scan_barcode">扫描条码</string>
+    <string name="camera_confirm">确认</string>
+    <string name="camera_clear">清除</string>
+    <string name="camera_scan_result_placeholder">扫描结果将显示在这里</string>
+    <string name="camera_scan_result_format">扫描结果: %s</string>
+    <string name="camera_photo_saved">照片已保存</string>
+    <string name="camera_please_take_photo">请先拍照或选择图片</string>
+    <string name="camera_scan_canceled">扫描取消</string>
+    <string name="camera_scan_success">扫描成功: %s</string>
+    <string name="camera_qr_scan_prompt">将二维码放入框内扫描</string>
+    <string name="camera_barcode_scan_prompt">将条码放入框内扫描</string>
+    <string name="camera_permission_required">需要相机权限才能拍照</string>
+    <string name="camera_storage_permission_required">需要存储权限才能选择图片</string>
+    <string name="camera_cannot_open">无法打开相机</string>
+    <string name="camera_login_required">请先登录</string>
+
+    <!-- 产品图鉴页面 -->
+    <string name="gallery_title">产品图鉴</string>
+    <string name="gallery_description">这是产品图鉴页面</string>
 </resources>

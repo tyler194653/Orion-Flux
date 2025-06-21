@@ -48,14 +48,8 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.mobile_employee_simple.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
         android:id="@+id/nav_user_info"
         android:name="com.example.mobile_employee_simple.ui.user.UserInfoFragment"
-        android:label="用户信息"
+        android:label="@string/user_info"
         tools:layout="@layout/fragment_user_info" />
 </navigation>
