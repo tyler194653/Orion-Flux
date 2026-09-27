@@ -25,6 +25,24 @@ export interface ChatResponse {
   finish_reason: string;
 }
 
+export interface InventoryItemData {
+  productId: string;
+  productName: string;
+  sku?: string;
+  currentStock: number;
+  safetyStock?: number;
+  monthlySalesVolume?: number;
+  unitCost?: number;
+  leadTimeDays?: number;
+  lastRestockDate?: string;
+}
+
+export interface InventoryData {
+  warehouseId?: string;
+  timestamp?: string;
+  items: InventoryItemData[];
+}
+
 export class SiliconFlowService {
   private client: OpenAI;
   private config: SiliconFlowConfig;
@@ -116,7 +134,7 @@ export class SiliconFlowService {
   /**
    * 库存优化建议
    */
-  async getInventoryOptimization(inventoryData: any): Promise<string> {
+  async getInventoryOptimization(inventoryData: InventoryData): Promise<string> {
     const systemPrompt = `你是一个库存管理专家。请分析库存数据并提供优化建议。
     
     请重点关注：
