@@ -82,7 +82,6 @@ export class SiliconFlowService {
         finish_reason: choice.finish_reason || 'stop'
       };
     } catch (error) {
-      console.error('SiliconFlow chat error:', error);
       throw new Error(`聊天请求失败: ${error instanceof Error ? error.message : '未知错误'}`);
     }
   }
@@ -256,7 +255,6 @@ export class SiliconFlowService {
       });
       return true;
     } catch (error) {
-      console.error('API密钥验证失败:', error);
       return false;
     }
   }
