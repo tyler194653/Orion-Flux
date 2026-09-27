@@ -20,7 +20,7 @@ import {
   useToast
 } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
-import { LineChart, BarChart } from 'react-native-chart-kit';
+import { LineChart } from 'react-native-chart-kit';
 
 const { width } = Dimensions.get('window');
 
