@@ -21,8 +21,24 @@ import {
 } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
 import { LineChart, BarChart } from 'react-native-chart-kit';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const { width } = Dimensions.get('window');
+
+export type DashboardStackParamList = {
+  ManagerCockpit: undefined;
+  AIAnalytics: undefined;
+  Settings: undefined;
+  DetailedAnalytics: undefined;
+  AlertDetail: { alertId: string };
+  AllAlerts: undefined;
+  TeamManagement: undefined;
+  ApprovalCenter: undefined;
+  Reports: undefined;
+  AIInsights: undefined;
+};
+
+type ManagerCockpitNavigationProp = StackNavigationProp<DashboardStackParamList, 'ManagerCockpit'>;
 
 interface KPI {
   label: string;
@@ -41,7 +57,7 @@ interface Alert {
 }
 
 interface ManagerCockpitScreenProps {
-  navigation: any;
+  navigation: ManagerCockpitNavigationProp;
 }
 
 const ManagerCockpitScreen: React.FC<ManagerCockpitScreenProps> = ({ navigation }) => {
