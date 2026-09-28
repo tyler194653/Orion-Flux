@@ -25,6 +25,24 @@ export interface ChatResponse {
   finish_reason: string;
 }
 
+export interface InventoryItemData {
+  productId: string;
+  productName: string;
+  sku?: string;
+  currentStock: number;
+  safetyStock?: number;
+  monthlySalesVolume?: number;
+  unitCost?: number;
+  leadTimeDays?: number;
+  lastRestockDate?: string;
+}
+
+export interface InventoryData {
+  warehouseId?: string;
+  timestamp?: string;
+  items: InventoryItemData[];
+}
+
 export class SiliconFlowService {
   private client: OpenAI;
   private config: SiliconFlowConfig;
@@ -67,7 +85,7 @@ export class SiliconFlowService {
         max_tokens: options?.maxTokens || 2048,
         temperature: options?.temperature || 0.7,
         stream: options?.stream || false
-      });
+      }) as OpenAI.Chat.Completions.ChatCompletion;
 
       const choice = response.choices[0];
       
@@ -82,7 +100,6 @@ export class SiliconFlowService {
         finish_reason: choice.finish_reason || 'stop'
       };
     } catch (error) {
-      console.error('SiliconFlow chat error:', error);
       throw new Error(`聊天请求失败: ${error instanceof Error ? error.message : '未知错误'}`);
     }
   }
@@ -90,7 +107,7 @@ export class SiliconFlowService {
   /**
    * 供应链数据分析
    */
-  async analyzeSupplyChainData(data: any, analysisType: string): Promise<string> {
+  async analyzeSupplyChainData<T>(data: T, analysisType: string): Promise<string> {
     const systemPrompt = `你是一个专业的供应链数据分析师。请分析以下数据并提供专业的洞察和建议。
     分析类型: ${analysisType}
     
@@ -105,18 +122,23 @@ export class SiliconFlowService {
       { role: 'user', content: JSON.stringify(data) }
     ];
 
-    const response = await this.chat(messages, {
-      model: 'Qwen/Qwen2.5-72B-Instruct',
-      maxTokens: 4000
-    });
+    try {
+      const response = await this.chat(messages, {
+        model: 'Qwen/Qwen2.5-72B-Instruct',
+        maxTokens: 4000
+      });
 
-    return response.content;
+      return response.content;
+    } catch (error) {
+      console.error('analyzeSupplyChainData error:', error);
+      throw new Error(`供应链数据分析失败: ${error instanceof Error ? error.message : '未知错误'}`);
+    }
   }
 
   /**
    * 库存优化建议
    */
-  async getInventoryOptimization(inventoryData: any): Promise<string> {
+  async getInventoryOptimization(inventoryData: InventoryData): Promise<string> {
     const systemPrompt = `你是一个库存管理专家。请分析库存数据并提供优化建议。
     
     请重点关注：
@@ -256,7 +278,6 @@ export class SiliconFlowService {
       });
       return true;
     } catch (error) {
-      console.error('API密钥验证失败:', error);
       return false;
     }
   }

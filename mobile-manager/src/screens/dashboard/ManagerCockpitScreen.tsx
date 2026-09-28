@@ -24,6 +24,21 @@ import { LineChart } from 'react-native-chart-kit';
 
 const { width } = Dimensions.get('window');
 
+export type DashboardStackParamList = {
+  ManagerCockpit: undefined;
+  AIAnalytics: undefined;
+  Settings: undefined;
+  DetailedAnalytics: undefined;
+  AlertDetail: { alertId: string };
+  AllAlerts: undefined;
+  TeamManagement: undefined;
+  ApprovalCenter: undefined;
+  Reports: undefined;
+  AIInsights: undefined;
+};
+
+type ManagerCockpitNavigationProp = StackNavigationProp<DashboardStackParamList, 'ManagerCockpit'>;
+
 interface KPI {
   label: string;
   value: string;
@@ -41,7 +56,7 @@ interface Alert {
 }
 
 interface ManagerCockpitScreenProps {
-  navigation: any;
+  navigation: ManagerCockpitNavigationProp;
 }
 
 const ManagerCockpitScreen: React.FC<ManagerCockpitScreenProps> = ({ navigation }) => {
