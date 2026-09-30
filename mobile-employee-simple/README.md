@@ -1,324 +1,190 @@
 # 供应链员工端 - 混合开发方案 v1.0.0
 
-这是一个使用原生Android + React Native混合开发的供应链员工端应用。
-
-## 🚀 项目概述
-
-本项目采用混合开发架构，结合原生Android的性能优势和React Native的跨平台开发效率，为供应链员工提供高效的工作工具。
-
-### 📱 技术栈
-- **原生Android**: Kotlin + Jetpack Compose + Navigation Component
-- **React Native**: TypeScript + Metro Bundler
-- **混合架构**: Fragment + React Native Bridge
-- **构建工具**: Gradle + Metro
-
-## 🌍 多语言支持
-
-### ✅ 已支持语言
-- **中文 (简体)**: 默认语言
-- **English**: 完整英文界面支持
-
-### 🔄 语言切换功能
-- ✅ 登录界面语言切换按钮
-- ✅ 实时语言切换
-- ✅ 语言设置持久化
-- ✅ 应用重启后保持语言设置
-
-### 📱 多语言特性
-- ✅ 完整的界面文本本地化
-- ✅ 动态语言切换
-- ✅ 系统语言自动检测
-- ✅ 语言偏好设置保存
-
-## ✅ 已实现功能
-
-### 🔐 用户认证模块
-- ✅ 登录界面 (LoginFragment)
-- ✅ 登录状态管理 (LoginViewModel)
-- ✅ 用户信息页面 (UserInfoFragment)
-- ✅ 登出功能
-- ✅ 生物识别服务 (BiometricService)
-- ✅ 多语言登录界面
-
-### 🏠 主界面导航
-- ✅ 侧边栏导航 (NavigationView)
-- ✅ 工具栏菜单
-- ✅ 页面间导航 (Navigation Component)
-- ✅ 登录状态动态导航控制
-- ✅ 主页功能 (位于侧边栏顶部)
-- ✅ 多语言导航菜单
-
-### 📊 工作台模块
-- ✅ 工作台主界面 (WorkbenchFragment)
-- ✅ 任务列表入口
-- ✅ 库存管理入口
-- ✅ 报表入口
-- ✅ 多语言工作台界面
-
-### 📷 相机模块
-- ✅ 相机服务 (CameraService)
-- ✅ 相机界面 (CameraFragment)
-- ✅ 拍照功能
-- ✅ 多语言相机界面
-
-### 📦 库存管理模块
-- ✅ 库存列表界面 (InventoryFragment)
-- ✅ 库存适配器 (InventoryAdapter)
-- ✅ 库存数据管理 (InventoryViewModel)
-- ✅ 多语言库存管理界面
-
-### 🖼️ 产品图鉴模块
-- ✅ 产品图鉴界面 (GalleryFragment)
-- ✅ 产品展示功能
-- ✅ 多语言产品图鉴界面
-
-### ⚙️ 系统设置模块
-- ✅ 设置主界面 (SettingsFragment)
-- ✅ 关于对话框 (AboutDialogFragment)
-- ✅ 帮助对话框 (HelpDialogFragment)
-- ✅ 设置数据管理 (SettingsViewModel)
-- ✅ 多语言设置界面
-
-### 🔔 通知服务
-- ✅ 通知服务 (NotificationService)
-- ✅ 推送通知管理
-- ✅ 本地通知处理
-
-### 📍 位置服务
-- ✅ 位置服务 (LocationService)
-- ✅ GPS定位功能
-- ✅ 位置权限管理
-
-### 🔄 数据同步
-- ✅ 同步服务 (SyncService)
-- ✅ 数据同步管理
-- ✅ 离线数据处理
-
-### 🎨 界面组件
-- ✅ 主页界面 (HomeFragment)
-- ✅ 多语言主页界面
-
-## 🔧 React Native 组件
-
-### 📱 已实现的React Native屏幕
-- ✅ AI工作助手 (AIWorkAssistantScreen)
-- ✅ 任务列表 (TaskListScreen)
-- ✅ 报表界面 (ReportsScreen)
-- ✅ 工作台界面 (WorkbenchScreen)
-
-### 🔗 混合架构集成
-- ✅ React Native Fragment集成
-- ✅ 原生与React Native数据传递
-- ✅ Metro Bundler配置
-
-## 🏗️ 项目结构
-
-```
-mobile-employee-simple/
-├── app/                          # Android原生应用
-│   ├── src/main/java/com/example/mobile_employee_simple/
-│   │   ├── MainActivity.kt       # 主Activity (包含语言切换逻辑)
-│   │   ├── MobileEmployeeApplication.kt  # 应用类
-│   │   ├── ui/                   # UI界面
-│   │   │   ├── auth/             # 认证模块 (包含语言切换功能)
-│   │   │   ├── home/             # 主页
-│   │   │   ├── workbench/        # 工作台
-│   │   │   ├── inventory/        # 库存管理
-│   │   │   ├── camera/           # 相机模块
-│   │   │   ├── settings/         # 设置模块
-│   │   │   ├── user/             # 用户信息
-│   │   │   ├── gallery/          # 产品图鉴
-│   │   │   └── react/            # React Native集成
-│   │   └── services/             # 后台服务
-│   │       ├── BiometricService.kt
-│   │       ├── CameraService.kt
-│   │       ├── LocationService.kt
-│   │       ├── NotificationService.kt
-│   │       └── SyncService.kt
-│   └── src/main/res/             # 资源文件
-│       ├── layout/               # 布局文件
-│       ├── menu/                 # 菜单文件
-│       ├── navigation/           # 导航文件
-│       ├── values/               # 中文资源文件
-│       └── values-en/            # 英文资源文件
-├── src/                          # React Native源码
-│   ├── App.tsx                   # React Native主组件
-│   └── screens/                  # React Native屏幕
-│       ├── AIWorkAssistantScreen.tsx
-│       ├── TaskListScreen.tsx
-│       ├── ReportsScreen.tsx
-│       └── WorkbenchScreen.tsx
-├── package.json                  # React Native依赖
-├── metro.config.js               # Metro配置
-└── tsconfig.json                 # TypeScript配置
-```
-
-## 🚀 快速开始
-
-### 环境要求
-- Android Studio Arctic Fox 或更高版本
-- Android SDK API 34
-- Node.js 16+ 
-- React Native CLI
-
-### 安装步骤
-
-1. **克隆项目**
-```bash
-git clone https://github.com/tyler194653/SAAS.git
-cd SAAS/mobile-employee-simple
-```
-
-2. **安装React Native依赖**
-```bash
-npm install
-```
-
-3. **启动Metro Bundler**
-```bash
-npx react-native start
-```
-
-4. **构建并运行Android应用**
-```bash
-./gradlew assembleDebug
-adb install app/build/outputs/apk/debug/app-debug.apk
-```
-
-### 开发模式
-
-1. **启动开发服务器**
-```bash
-npx react-native start
-```
-
-2. **在Android Studio中运行项目**
-- 打开 `mobile-employee-simple` 文件夹
-- 连接Android设备或启动模拟器
-- 点击运行按钮
-
-## 🔧 配置说明
-
-### Android配置
-- 最低SDK版本: API 24 (Android 7.0)
-- 目标SDK版本: API 34 (Android 14)
-- 编译SDK版本: API 34
-
-### React Native配置
-- React Native版本: 0.72+
-- TypeScript支持
-- Metro Bundler配置
-
-### 🌍 多语言配置
-- 支持语言: 中文(zh)、英文(en)
-- 语言切换: 登录界面语言切换按钮
-- 语言持久化: SharedPreferences存储
-- 自动语言检测: 系统语言自动适配
-
-## 📱 功能特性
-
-### 🔐 安全认证
-- 多种登录方式支持
-- 生物识别集成
-- 登录状态持久化
-- 安全退出机制
-- 多语言登录界面
-
-### 🧭 智能导航
-- 动态侧边栏导航
-- 登录状态感知导航
-- 页面间流畅切换
-- 返回栈管理
-- 主页功能位于侧边栏顶部
-- 多语言导航菜单
-
-### 📊 数据管理
-- 离线数据支持
-- 数据同步服务
-- 本地存储管理
-- 数据冲突处理
-
-### 🔔 通知系统
-- 推送通知支持
-- 本地通知管理
-- 通知权限处理
-- 通知分类管理
-
-### 📍 位置服务
-- GPS定位功能
-- 位置权限管理
-- 位置数据缓存
-- 位置服务监控
-
-### 🌍 国际化支持
-- 完整的中英文界面
-- 实时语言切换
-- 语言设置持久化
-- 系统语言自动检测
-- 所有界面文本本地化
-
-## 🐛 已知问题
-
-1. **React Native组件集成**
-   - 部分React Native组件需要进一步优化
-   - 数据传递机制需要完善
-
-2. **性能优化**
-   - 大量数据时的列表性能需要优化
-   - 内存使用需要进一步优化
-
-3. **UI/UX改进**
-   - 部分界面需要响应式设计优化
-   - 动画效果需要增强
-
-4. **多语言支持**
-   - React Native组件的多语言支持需要完善
-   - 部分动态文本需要进一步本地化
-
-## 🔮 后续开发计划
-
-### 短期目标 (v1.1.0)
-- [ ] 完善React Native组件集成
-- [ ] 优化应用性能
-- [ ] 增强UI/UX设计
-- [ ] 添加单元测试
-- [ ] 完善React Native组件的多语言支持
-
-### 中期目标 (v1.2.0)
-- [ ] 实现完整的库存管理功能
-- [ ] 添加订单管理模块
-- [ ] 集成AI工作助手
-- [ ] 实现数据同步功能
-- [ ] 添加更多语言支持（如繁体中文、日文等）
-
-### 长期目标 (v2.0.0)
-- [ ] 支持iOS平台
-- [ ] 实现完整的供应链管理功能
-- [ ] 集成企业级安全特性
-- [ ] 支持多语言国际化
-- [ ] 实现完整的React Native多语言架构
-
-## 🤝 贡献指南
-
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
-
-## 📞 联系方式
-
-- 项目维护者: Tyler
-- 邮箱: [your-email@example.com]
-- 项目地址: [https://github.com/tyler194653/SAAS]
+这是一个使用原生 Android (Kotlin) + React Native (TypeScript) 混合开发的供应链员工端应用。
 
 ---
 
-**版本**: v1.0.0  
-**最后更新**: 2024年12月  
-**状态**: 开发中  
-**多语言支持**: ✅ 中文、英文
+## 🚀 项目概述
+
+本项目采用混合开发架构，结合原生 Android 在硬件交互（相机、生物识别、定位）与系统集成方面的性能优势，以及 React Native 在跨平台 UI 开发中的高效体验，为供应链员工提供完整、稳定且高效率的工作工具。
+
+---
+
+## 📱 技术栈
+
+### 🤖 原生 Android
+- **开发语言**: Kotlin 2.0.21
+- **构建工具**: Gradle 8.11.1 (Android Gradle Plugin 8.10.1)
+- **SDK 配置**: `compileSdk = 35`, `targetSdk = 35`, `minSdk = 26` (Android 8.0+)
+- **架构组件**: Jetpack Navigation Component, ViewModel, LiveData, ViewBinding
+- **硬件与核心库**:
+  - **相机与扫码**: CameraX (1.3.1), ZXing Embedded (4.3.0) / ZXing Core (3.5.2)
+  - **生物识别**: AndroidX Biometric (1.1.0)
+  - **网络请求**: Retrofit (2.9.0), OkHttp3 (4.12.0), Gson (2.10.1)
+  - **图片加载**: Glide (4.16.0)
+  - **权限管理**: PermissionX (1.7.1)
+  - **异步并发**: Kotlin Coroutines (1.7.3)
+
+### ⚛️ React Native
+- **开发语言**: TypeScript
+- **构建 & 打包**: Metro Bundler (1.3.0)
+- **导航组件**: BottomTabNavigator
+- **混合集成**: React Native Fragment + Bridge 架构
+
+---
+
+## 🏗️ 项目结构
+
+```text
+mobile-employee-simple/
+├── app/                                              # Android 原生模块
+│   ├── build.gradle.kts                              # 应用层 Gradle 构建配置
+│   ├── proguard-rules.pro                            # ProGuard 混淆规则
+│   └── src/
+│       ├── main/
+│       │   ├── AndroidManifest.xml                   # 应用清单文件
+│       │   ├── java/com/example/mobile_employee_simple/
+│       │   │   ├── MainActivity.kt                   # 主 Activity (处理 Navigation、侧边栏及语言切换)
+│       │   │   ├── MobileEmployeeApplication.kt      # Application 入口类
+│       │   │   ├── services/                         # 后台服务与工具
+│       │   │   │   ├── BiometricService.kt           # 生物识别 / 指纹认证服务
+│       │   │   │   ├── CameraService.kt              # 相机调用与图片处理服务
+│       │   │   │   ├── LocationService.kt            # GPS 定位与权限处理服务
+│       │   │   │   ├── NotificationService.kt        # 本地与推送通知服务
+│       │   │   │   └── SyncService.kt                # 离线数据缓存与同步服务
+│       │   │   └── ui/                               # 原生 UI 模块
+│       │   │       ├── auth/                         # 用户认证 (LoginFragment, LoginViewModel)
+│       │   │       ├── camera/                       # 相机与扫码 (CameraFragment, CameraViewModel)
+│       │   │       ├── gallery/                      # 产品图鉴 (GalleryFragment, GalleryViewModel)
+│       │   │       ├── home/                         # 主页 (HomeFragment, HomeViewModel)
+│       │   │       ├── inventory/                    # 库存管理 (InventoryFragment, InventoryViewModel, InventoryAdapter)
+│       │   │       ├── react/                        # React Native 容器 (ReactNativeFragment)
+│       │   │       ├── settings/                     # 系统设置与弹窗 (SettingsFragment, SettingsViewModel, About/Help Dialog)
+│       │   │       ├── slideshow/                    # 多媒体展示 (SlideshowFragment, SlideshowViewModel)
+│       │   │       ├── user/                         # 个人信息 (UserInfoFragment)
+│       │   │       └── workbench/                    # 原生工作台 (WorkbenchFragment)
+│       │   └── res/                                  # 资源文件
+│       │       ├── layout/                           # XML 布局定义
+│       │       ├── menu/                             # 侧边栏与 Toolbar 菜单项
+│       │       ├── navigation/                       # Jetpack Navigation 导航图 (mobile_navigation.xml)
+│       │       ├── values/                           # 默认资源 & 中文文本 (strings.xml, colors.xml, themes.xml)
+│       │       └── values-en/                        # 英文语言包 (strings.xml)
+│       ├── androidTest/                              # Android UI & 集成测试
+│       └── test/                                     # 原生单元测试 (JUnit 4)
+├── src/                                              # React Native 源码模块
+│   ├── App.tsx                                       # React Native 主入口
+│   ├── navigation/
+│   │   └── BottomTabNavigator.tsx                    # RN 底部标签栏导航
+│   └── screens/                                      # React Native 业务界面
+│       ├── AIWorkAssistantScreen.tsx                 # AI 工作助手界面
+│       ├── ApprovalsScreen.tsx                       # 审批流程界面
+│       ├── ProfileScreen.tsx                         # 个人中心界面
+│       ├── ReportsScreen.tsx                         # 数据报表统计界面
+│       ├── TaskListScreen.tsx                        # 任务列表界面
+│       └── WorkbenchScreen.tsx                       # RN 混合工作台界面
+├── gradle/
+│   ├── libs.versions.toml                            # Gradle 版本目录 (Dependencies Version Catalog)
+│   └── wrapper/                                      # Gradle Wrapper 文件
+├── build.gradle.kts                                  # 顶层 Gradle 构建脚本
+├── settings.gradle.kts                               # 项目与仓库设置脚本
+├── gradle.properties                                 # Gradle 全局属性配置
+├── index.js                                          # Metro 打包入口文件
+├── metro.config.js                                   # Metro Bundler 配置文件
+├── package.json                                      # Node.js 依赖与脚本配置
+└── tsconfig.json                                     # TypeScript 编译配置
+```
+
+---
+
+## ✨ 核心功能模块
+
+### 🔐 1. 认证与安全 (Auth & Security)
+- **登录管理**: `LoginFragment` + `LoginViewModel` 管理登录状态持久化。
+- **生物识别**: 通过 `BiometricService` 支持指纹及面部身份验证。
+- **多语言登录**: 支持登录界面中文/英文实时切换与持久化偏好。
+
+### 🧭 2. 导航与主框架 (Navigation Framework)
+- **侧边栏导航**: `DrawerLayout` + `NavigationView` 组合，覆盖首页、工作台、相机、库存、图鉴、设置及个人信息。
+- **动作栏集成**: 顶部 `Toolbar` 菜单提供用户信息与设置快捷入口。
+- **路由控制**: 使用 `Navigation Component` 管理路由栈与登录状态感知导航。
+
+### 📊 3. 工作台与业务 (Workbench & Operations)
+- **原生工作台**: `WorkbenchFragment` 提供任务列表、库存管理、报表统计等快捷入口。
+- **RN 混合工作台**: 通过 `ReactNativeFragment` 无缝嵌入 React Native 编写的工作台及 AI 助手。
+
+### 📷 4. 相机与扫码 (Camera & Scanner)
+- **实时预览与拍照**: 基于 `CameraX` API 实现高质量相机预览与照片捕获。
+- **条码/二维码解析**: 集成 `ZXing` 库实现条形码与二维码的扫描解析。
+
+### 📦 5. 库存与产品图鉴 (Inventory & Gallery)
+- **库存管理**: `InventoryFragment` + `InventoryAdapter` 提供高效列表渲染与物品搜索筛选。
+- **产品图鉴**: `GalleryFragment` 展示产品多图与详细规格信息。
+
+### ⚙️ 6. 系统设置与多语言 (Settings & i18n)
+- **系统设置**: 支持偏好设置、离线模式切换、版本说明与帮助文档弹窗 (`AboutDialogFragment`, `HelpDialogFragment`)。
+- **多语言国际化**: 完整支持**中文（简体）**与**英文**，提供系统语言检测与界面实时切换。
+
+### 🛠️ 7. 后台服务与数据同步 (Services & Sync)
+- **位置服务 (`LocationService`)**: GPS 实时定位与权限申请管理。
+- **通知服务 (`NotificationService`)**: 本地消息通知与推送通道管理。
+- **离线同步 (`SyncService`)**: 支持本地 JSON 离线数据缓存与网络恢复后的自动同步。
+
+### ⚛️ 8. React Native 混合组件
+- **AI 工作助手 (`AIWorkAssistantScreen`)**: 智能对话与任务辅助。
+- **任务列表与报表 (`TaskListScreen`, `ReportsScreen`)**: 图表展示与实时任务追踪。
+- **审批管理 (`ApprovalsScreen`)**: 流程节点查看与快速审批。
+
+---
+
+## 🌍 多语言国际化 (i18n)
+
+应用内置完善的国际化支持：
+- **简体中文 (`values/strings.xml`)**: 默认系统语言。
+- **英文 (`values-en/strings.xml`)**: 完整英文文本支持。
+- **切换机制**: 在登录页与系统设置页中支持一键切换语言，并通过 `SharedPreferences` 保存偏好，重新打开应用自动生效。
+
+---
+
+## 🛠️ 环境要求与构建指南
+
+### 📋 环境要求
+- **Android Studio**: Android Studio Ladybug (2024.2+) / Jellyfish 或更高版本
+- **JDK**: Java 17 或 JDK 21 (推荐配置 `JAVA_HOME`)
+- **Android SDK**: API Level 35 (Android 15)
+- **Node.js**: v18.x 或更高版本
+- **包管理器**: npm 或 yarn
+
+### 🚀 构建与运行步骤
+
+1. **克隆项目**
+   ```bash
+   git clone https://github.com/tyler194653/SAAS.git
+   cd SAAS/mobile-employee-simple
+   ```
+
+2. **安装 React Native 依赖**
+   ```bash
+   npm install
+   ```
+
+3. **启动 Metro 服务 (React Native 开发服务)**
+   ```bash
+   npm start
+   ```
+
+4. **编译与运行 Android 应用**
+   - **方式一（Android Studio GUI）**: 
+     1. 使用 Android Studio 打开 `mobile-employee-simple` 项目。
+     2. 确保已关闭 Gradle 的 Offline Mode (离线模式)。
+     3. 点击 **Sync Project with Gradle Files** 按钮。
+     4. 选择连接的 Android 设备或模拟器，点击 **Run 'app'**。
+   - **方式二（命令行）**:
+     ```bash
+     ./gradlew app:assembleDebug
+     ```
+
+---
+
+## 📄 许可证
+
+本项目采用 MIT 许可证，详情请参阅项目中的 [LICENSE](LICENSE) 文件。

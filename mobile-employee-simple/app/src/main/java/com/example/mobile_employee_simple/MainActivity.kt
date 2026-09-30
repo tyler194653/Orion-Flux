@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 // 已登录：启用侧边导航，设置所有页面为顶级目标
                 appBarConfiguration = AppBarConfiguration(
                     setOf(
-                        R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_settings, R.id.nav_user_info
+                        R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_gallery, R.id.nav_settings, R.id.nav_user_info
                     ), drawerLayout
                 )
                 
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                     // 重新配置AppBarConfiguration，设置所有页面为顶级目标
                     appBarConfiguration = AppBarConfiguration(
                         setOf(
-                            R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_settings, R.id.nav_user_info
+                            R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_gallery, R.id.nav_settings, R.id.nav_user_info
                         ), drawerLayout
                     )
                     setupActionBarWithNavController(navController, appBarConfiguration)
@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity() {
         // 重新配置导航
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_settings, R.id.nav_user_info
+                R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_gallery, R.id.nav_settings, R.id.nav_user_info
             ), drawerLayout
         )
         

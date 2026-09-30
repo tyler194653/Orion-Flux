@@ -41,12 +41,13 @@
 
     <!-- Workbench -->
     <string name="workbench_title">Workbench</string>
-    <string name="workbench_task_list">Task List (React Native)</string>
-    <string name="workbench_inventory">Inventory (Native Android)</string>
-    <string name="workbench_reports">Reports (React Native)</string>
-    <string name="workbench_task_list_developing">Task list feature is under development</string>
-    <string name="workbench_reports_developing">Reports feature is under development</string>
-    <string name="workbench_inventory_developing">Inventory feature is under development</string>
+    <string name="workbench_task_list">Task List</string>
+    <string name="workbench_inventory">Inventory Management</string>
+    <string name="workbench_camera">Scan &amp; Camera</string>
+    <string name="workbench_reports">Data Reports</string>
+    <string name="workbench_task_list_developing">Task List</string>
+    <string name="workbench_reports_developing">Data Reports</string>
+    <string name="workbench_inventory_developing">Inventory</string>
     <string name="workbench_login_required">Please login first</string>
 
     <!-- Settings -->

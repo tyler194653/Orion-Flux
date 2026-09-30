@@ -40,12 +40,13 @@
 
     <!-- 工作台 -->
     <string name="workbench_title">工作台</string>
-    <string name="workbench_task_list">任务列表 (React Native)</string>
-    <string name="workbench_inventory">库存管理 (原生Android)</string>
-    <string name="workbench_reports">报表 (React Native)</string>
-    <string name="workbench_task_list_developing">任务列表功能开发中</string>
-    <string name="workbench_reports_developing">报表功能开发中</string>
-    <string name="workbench_inventory_developing">库存管理功能开发中</string>
+    <string name="workbench_task_list">任务列表</string>
+    <string name="workbench_inventory">库存管理</string>
+    <string name="workbench_camera">扫码与拍照</string>
+    <string name="workbench_reports">数据报表</string>
+    <string name="workbench_task_list_developing">任务列表</string>
+    <string name="workbench_reports_developing">报表统计</string>
+    <string name="workbench_inventory_developing">库存管理</string>
     <string name="workbench_login_required">请先登录</string>
 
     <!-- 设置 -->

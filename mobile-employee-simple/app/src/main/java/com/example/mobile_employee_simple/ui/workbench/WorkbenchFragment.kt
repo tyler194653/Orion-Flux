@@ -1,5 +1,6 @@
 package com.example.mobile_employee_simple.ui.workbench
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.navigation.Navigation
 import com.example.mobile_employee_simple.R
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
-import com.example.mobile_employee_simple.ui.auth.LoginFragment
-// import com.example.mobile_employee_simple.ui.react.ReactNativeFragment
 
 class WorkbenchFragment : Fragment() {
 
@@ -36,59 +35,90 @@ class WorkbenchFragment : Fragment() {
         val titleText = view.findViewById<TextView>(R.id.workbench_title)
         val taskListButton = view.findViewById<Button>(R.id.task_list_button)
         val inventoryButton = view.findViewById<Button>(R.id.inventory_button)
+        val cameraButton = view.findViewById<Button>(R.id.camera_button)
         val reportsButton = view.findViewById<Button>(R.id.reports_button)
 
-        titleText.text = "工作台"
+        titleText.text = getString(R.string.workbench_title)
 
-        // 任务列表 - 使用React Native组件
+        // 任务列表
         taskListButton.setOnClickListener {
-            // showReactNativeTaskList()
-            Toast.makeText(context, "任务列表功能开发中", Toast.LENGTH_SHORT).show()
+            showTaskListDialog()
         }
 
-        // 库存管理 - 使用原生Android
+        // 库存管理
         inventoryButton.setOnClickListener {
-            showNativeInventory()
+            Navigation.findNavController(view).navigate(R.id.nav_inventory)
         }
 
-        // 报表 - 使用React Native组件
+        // 扫码与拍照盘点
+        cameraButton.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.nav_camera)
+        }
+
+        // 报表统计
         reportsButton.setOnClickListener {
-            // showReactNativeReports()
-            Toast.makeText(context, "报表功能开发中", Toast.LENGTH_SHORT).show()
+            showReportsDialog()
         }
     }
 
     private fun showLoginRequired() {
-        Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show()
-        val loginFragment = LoginFragment()
-        parentFragmentManager.commit {
-            replace(R.id.nav_host_fragment_content_main, loginFragment)
-            // 不添加到返回栈，这样用户按返回键时不会回到工作台页面
-        }
+        Toast.makeText(context, getString(R.string.workbench_login_required), Toast.LENGTH_SHORT).show()
+        val navController = Navigation.findNavController(requireView())
+        navController.navigate(R.id.nav_login)
     }
 
-    private fun showReactNativeTaskList() {
-        // val taskListFragment = ReactNativeFragment.newInstance("TaskListScreen")
-        // parentFragmentManager.commit {
-        //     replace(R.id.nav_host_fragment_content_main, taskListFragment)
-        //     addToBackStack(null)
-        // }
+    private fun showTaskListDialog() {
+        val tasks = arrayOf(
+            "📋 A区库存盘点 [高优先级 · 进行中]",
+            "📦 今日新订单发货处理 [中优先级 · 待处理]",
+            "🔍 B批次产品抽检 [低优先级 · 已完成]",
+            "⚙️ 仓储传送设备定期维护 [中优先级 · 待处理]"
+        )
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.workbench_task_list))
+            .setItems(tasks) { _, which ->
+                when (which) {
+                    0 -> {
+                        // 跳转到库存管理
+                        Navigation.findNavController(requireView()).navigate(R.id.nav_inventory)
+                    }
+                    1 -> {
+                        Toast.makeText(requireContext(), "已打开订单发货任务详情", Toast.LENGTH_SHORT).show()
+                    }
+                    2 -> {
+                        Toast.makeText(requireContext(), "B批次抽检已归档", Toast.LENGTH_SHORT).show()
+                    }
+                    3 -> {
+                        Toast.makeText(requireContext(), "设备维护工单已下发", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 
-    private fun showNativeInventory() {
-        // val inventoryFragment = InventoryFragment()
-        // parentFragmentManager.commit {
-        //     replace(R.id.nav_host_fragment_content_main, inventoryFragment)
-        //     addToBackStack(null)
-        // }
-        Toast.makeText(context, "库存管理功能开发中", Toast.LENGTH_SHORT).show()
-    }
+    private fun showReportsDialog() {
+        val message = """
+            📊 今日概览:
+            • 完成任务: 25 件
+            • 进行中任务: 8 件
+            • 待处理任务: 3 件
 
-    private fun showReactNativeReports() {
-        // val reportsFragment = ReactNativeFragment.newInstance("ReportsScreen")
-        // parentFragmentManager.commit {
-        //     replace(R.id.nav_host_fragment_content_main, reportsFragment)
-        //     addToBackStack(null)
-        // }
+            📦 核心库存状况:
+            • 产品A: 100个 (正常)
+            • 产品B: 50箱 (⚠️ 低库存预警)
+            • 产品C: 200件 (正常)
+
+            🎯 质量指标:
+            • 综合合格率: 98.5%
+            • 抽检返工率: 1.2%
+        """.trimIndent()
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.workbench_reports))
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 } 
