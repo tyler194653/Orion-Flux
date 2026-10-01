@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
 
             setupNavigationListeners()
+            updateDrawerHeader()
 
             // 检查登录状态
             val isLoggedIn = LoginViewModel.isLoggedIn(this)
@@ -295,5 +296,25 @@ class MainActivity : AppCompatActivity() {
         bottomNav.visibility = View.VISIBLE
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         bottomNav.selectedItemId = R.id.nav_workbench
+        updateDrawerHeader()
+    }
+
+    private fun updateDrawerHeader() {
+        try {
+            val headerView = binding.navView.getHeaderView(0) ?: return
+            val tvTitle = headerView.findViewById<android.widget.TextView>(R.id.tv_drawer_title)
+            val tvSubtitle = headerView.findViewById<android.widget.TextView>(R.id.textView)
+            val tvStatus = headerView.findViewById<android.widget.TextView>(R.id.tv_drawer_status)
+
+            val currentUser = LoginViewModel.getCurrentUser(this) ?: getString(R.string.default_user)
+            tvTitle?.text = currentUser
+
+            val profile = com.example.mobile_employee_simple.data.DataRepositoryProvider.userProfileRepository.getUserProfile(currentUser)
+            tvSubtitle?.text = profile.departmentAndRole
+            val statusText = getString(R.string.status_online)
+            tvStatus?.text = "L3 · $statusText"
+        } catch (e: Exception) {
+            Log.e("MainActivity", "updateDrawerHeader error", e)
+        }
     }
 }

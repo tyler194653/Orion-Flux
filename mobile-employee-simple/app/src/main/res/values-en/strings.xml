@@ -222,4 +222,6 @@
     <string name="help_title">User Guide</string>
     <string name="help_content">1. Authentication\n- Supports ID and test account login\n- Supports biometric quick login\n- Instant bilingual switching at top right\n\n2. Workbench\n- Centralized access to Approvals, Product Catalog, Inventory, AI Assistant\n- Rapid review of urgent dispatch and quality inspection reports\n- Daily operational data reports\n\n3. Approvals &amp; Inventory\n- Efficient processing of procurement, damage, and transfer tickets\n- Real-time multilingual support\n\nFor support, contact your system administrator.</string>
     <string name="btn_close">Close</string>
+    <!-- 在线状态 -->
+    <string name="status_online">Online</string>
 </resources>

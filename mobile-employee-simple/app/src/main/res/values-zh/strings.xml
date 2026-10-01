@@ -222,4 +222,6 @@
     <string name="help_title">使用帮助</string>
     <string name="help_content">1. 登录功能\n- 支持工号与测试账号登录\n- 支持生物识别快捷登录\n- 支持右上角实时中英文无缝切换\n\n2. 工作台\n- 审批流中心、产品图鉴、库存管理等业务流入口\n- 今日加急作业任务快速流转与质检报告核对\n- 数据报表概览\n\n3. 审批流与库存\n- 采购、货损、调拨等业务单据高效审批\n- 实时多语言支持\n\n如有问题，请联系系统管理员或技术支持。</string>
     <string name="btn_close">关闭</string>
+    <!-- 在线状态 -->
+    <string name="status_online">在线</string>
 </resources>
