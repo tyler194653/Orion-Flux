@@ -1,6 +1,7 @@
 package com.example.mobile_employee_simple.ui.camera
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.example.mobile_employee_simple.databinding.FragmentCameraBinding
 import com.example.mobile_employee_simple.services.CameraService
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
 import com.example.mobile_employee_simple.ui.auth.LoginFragment
+import com.example.mobile_employee_simple.ui.scanner.ScannerActivity
 import com.google.zxing.integration.android.IntentIntegrator
 
 class CameraFragment : Fragment() {
@@ -189,35 +191,24 @@ class CameraFragment : Fragment() {
         galleryLauncher.launch(intent)
     }
     
+    companion object {
+        private const val REQUEST_CODE_SCAN = 3001
+    }
+
     private fun startQRCodeScanner() {
-        val integrator = IntentIntegrator.forSupportFragment(this)
-        integrator.apply {
-            setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-            setPrompt(getString(R.string.camera_qr_scan_prompt))
-            setCameraId(0)
-            setBeepEnabled(true)
-            setBarcodeImageEnabled(true)
-            initiateScan()
+        val intent = Intent(requireContext(), ScannerActivity::class.java).apply {
+            putExtra(ScannerActivity.EXTRA_SCAN_MODE, ScannerActivity.MODE_CAMERA_SCAN)
+            putExtra(ScannerActivity.EXTRA_BARCODE_FORMAT, "QR_CODE")
         }
+        startActivityForResult(intent, REQUEST_CODE_SCAN)
     }
     
     private fun startBarcodeScanner() {
-        val integrator = IntentIntegrator.forSupportFragment(this)
-        integrator.apply {
-            setDesiredBarcodeFormats(
-                IntentIntegrator.CODE_128,
-                IntentIntegrator.CODE_39,
-                IntentIntegrator.EAN_13,
-                IntentIntegrator.EAN_8,
-                IntentIntegrator.UPC_A,
-                IntentIntegrator.UPC_E
-            )
-            setPrompt(getString(R.string.camera_barcode_scan_prompt))
-            setCameraId(0)
-            setBeepEnabled(true)
-            setBarcodeImageEnabled(true)
-            initiateScan()
+        val intent = Intent(requireContext(), ScannerActivity::class.java).apply {
+            putExtra(ScannerActivity.EXTRA_SCAN_MODE, ScannerActivity.MODE_CAMERA_SCAN)
+            putExtra(ScannerActivity.EXTRA_BARCODE_FORMAT, "BARCODE")
         }
+        startActivityForResult(intent, REQUEST_CODE_SCAN)
     }
     
     private fun clearPhoto() {
@@ -227,6 +218,14 @@ class CameraFragment : Fragment() {
     }
     
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE_SCAN && resultCode == Activity.RESULT_OK) {
+            val barcode = data?.getStringExtra(ScannerActivity.RESULT_BARCODE)
+            if (barcode != null) {
+                cameraViewModel.setScanResult(barcode)
+                Toast.makeText(context, getString(R.string.camera_scan_success, barcode), Toast.LENGTH_SHORT).show()
+            }
+            return
+        }
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {

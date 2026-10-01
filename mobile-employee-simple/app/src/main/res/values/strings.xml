@@ -246,4 +246,27 @@
     <string name="btn_close">关闭</string>
     <!-- 在线状态 -->
     <string name="status_online">在线</string>
+
+    <!-- 优化扫码功能相关 -->
+    <string name="scan_title_stock_in">扫码入库</string>
+    <string name="scan_title_stock_out">扫码出库</string>
+    <string name="scan_title_camera">条码 / 二维码扫描</string>
+    <string name="scan_viewfinder_hint">请将条码或二维码置于上方框内对焦</string>
+    <string name="scan_status_waiting">等待扫描</string>
+    <string name="scan_status_identified">已识别</string>
+    <string name="scan_info_card_title">扫描信息与货物详情</string>
+    <string name="scan_btn_copy">复制信息</string>
+    <string name="scan_copied_to_clipboard">扫描信息与条码已复制到剪贴板</string>
+    <string name="scan_btn_confirm_stock_in">确认入库</string>
+    <string name="scan_btn_confirm_stock_out">确认出库</string>
+    <string name="scan_btn_rescan">重新扫描</string>
+    <string name="scan_btn_done">完成</string>
+    <string name="scan_qty_label">作业数量</string>
+    <string name="scan_placeholder_hint">等待扫描...\n请将上方取景框对准货物条形码或标签二维码，扫描识别后将在此显示货物规格、编码与库位信息。</string>
+    <string name="scan_success_stock_in_format">入库确认成功：%1$s +%2$d (当前库存: %3$d)</string>
+    <string name="scan_success_stock_out_format">出库确认成功：%1$s -%2$d (当前库存: %3$d)</string>
+    <string name="scan_stock_out_insufficient">出库失败：当前在库量不足 (仅剩 %d)</string>
+    <string name="scan_torch_on">开启手电</string>
+    <string name="scan_torch_off">关闭手电</string>
+    <string name="scan_camera_permission_required">需要相机权限以进行扫码操作</string>
 </resources>

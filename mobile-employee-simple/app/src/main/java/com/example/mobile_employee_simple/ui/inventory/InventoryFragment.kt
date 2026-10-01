@@ -1,5 +1,6 @@
 package com.example.mobile_employee_simple.ui.inventory
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.example.mobile_employee_simple.services.LocationService
 import com.example.mobile_employee_simple.services.NotificationService
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
 import com.example.mobile_employee_simple.ui.auth.LoginFragment
+import com.example.mobile_employee_simple.ui.scanner.ScannerActivity
 import com.google.zxing.integration.android.IntentIntegrator
 
 class InventoryFragment : Fragment() {
@@ -157,40 +159,24 @@ class InventoryFragment : Fragment() {
         inventoryViewModel.refreshInventoryData()
     }
     
+    companion object {
+        private const val REQUEST_CODE_SCAN = 2001
+    }
+
     private fun startScanForStockIn() {
-        val integrator = IntentIntegrator.forSupportFragment(this)
-        integrator.apply {
-            setDesiredBarcodeFormats(
-                IntentIntegrator.CODE_128,
-                IntentIntegrator.CODE_39,
-                IntentIntegrator.EAN_13,
-                IntentIntegrator.EAN_8,
-                IntentIntegrator.QR_CODE
-            )
-            setPrompt(getString(R.string.inventory_scan_in_prompt))
-            setCameraId(0)
-            setBeepEnabled(true)
-            setBarcodeImageEnabled(true)
-            initiateScan()
+        currentOperation = OperationType.STOCK_IN
+        val intent = Intent(requireContext(), ScannerActivity::class.java).apply {
+            putExtra(ScannerActivity.EXTRA_SCAN_MODE, ScannerActivity.MODE_STOCK_IN)
         }
+        startActivityForResult(intent, REQUEST_CODE_SCAN)
     }
     
     private fun startScanForStockOut() {
-        val integrator = IntentIntegrator.forSupportFragment(this)
-        integrator.apply {
-            setDesiredBarcodeFormats(
-                IntentIntegrator.CODE_128,
-                IntentIntegrator.CODE_39,
-                IntentIntegrator.EAN_13,
-                IntentIntegrator.EAN_8,
-                IntentIntegrator.QR_CODE
-            )
-            setPrompt(getString(R.string.inventory_scan_out_prompt))
-            setCameraId(0)
-            setBeepEnabled(true)
-            setBarcodeImageEnabled(true)
-            initiateScan()
+        currentOperation = OperationType.STOCK_OUT
+        val intent = Intent(requireContext(), ScannerActivity::class.java).apply {
+            putExtra(ScannerActivity.EXTRA_SCAN_MODE, ScannerActivity.MODE_STOCK_OUT)
         }
+        startActivityForResult(intent, REQUEST_CODE_SCAN)
     }
     
     private fun startInventoryCheck() {
@@ -245,6 +231,14 @@ class InventoryFragment : Fragment() {
     }
     
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE_SCAN) {
+            refreshInventoryData()
+            val barcode = data?.getStringExtra(ScannerActivity.RESULT_BARCODE)
+            if (barcode != null) {
+                inventoryViewModel.setScanResult(barcode)
+            }
+            return
+        }
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {

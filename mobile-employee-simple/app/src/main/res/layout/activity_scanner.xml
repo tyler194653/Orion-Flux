@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+    <!-- 顶部状态栏与导航栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/brand_primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:elevation="4dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/btn_close"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_scanner_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/scan_title_camera"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <ImageButton
+            android:id="@+id/btn_torch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/scan_torch_on"
+            android:src="@drawable/ic_flash_on"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <!-- 顶部取景框区域（横置方便竖屏使用） -->
+    <FrameLayout
+        android:id="@+id/fl_viewfinder_container"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/black">
+
+        <com.journeyapps.barcodescanner.DecoratedBarcodeView
+            android:id="@+id/barcode_scanner_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:zxing_preview_scaling_strategy="centerCrop"
+            app:zxing_use_texture_view="false" />
+
+        <TextView
+            android:id="@+id/tv_viewfinder_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_viewfinder_hint"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="@string/scan_viewfinder_hint"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </FrameLayout>
+
+    <!-- 下方内容区域：滚动查看扫描信息文本框与确认出入库按钮 -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 扫描信息展示卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/slate_200"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <!-- 卡片标题与复制按钮 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_qr_code_scanner"
+                            app:tint="@color/brand_secondary"
+                            android:contentDescription="@null" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/scan_info_card_title"
+                            android:textColor="@color/slate_900"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_scan_badge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_pending"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="@string/scan_status_waiting"
+                            android:textColor="@color/status_pending_text"
+                            android:textSize="11sp"
+                            android:layout_marginEnd="8dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_copy_info"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="0dp"
+                            android:text="@string/scan_btn_copy"
+                            android:textSize="12sp"
+                            app:icon="@drawable/ic_content_copy"
+                            app:iconSize="14dp"
+                            app:iconPadding="4dp"
+                            app:strokeColor="@color/brand_secondary"
+                            android:textColor="@color/brand_secondary"
+                            app:iconTint="@color/brand_secondary" />
+                    </LinearLayout>
+
+                    <!-- 扫描信息展示文本框（可选择、可复制） -->
+                    <TextView
+                        android:id="@+id/tv_cargo_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="140dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_scan_info_box"
+                        android:padding="12dp"
+                        android:text="@string/scan_placeholder_hint"
+                        android:textColor="@color/slate_800"
+                        android:textSize="13sp"
+                        android:lineSpacingMultiplier="1.25"
+                        android:textIsSelectable="true" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 入库操作专属面板 -->
+            <LinearLayout
+                android:id="@+id/layout_stock_in_actions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <!-- 数量调节器 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="4dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/scan_qty_label"
+                        android:textColor="@color/slate_700"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btn_stock_in_qty_minus"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_badge_pending"
+                        android:src="@drawable/ic_remove"
+                        android:contentDescription="@null"
+                        app:tint="@color/slate_700" />
+
+                    <TextView
+                        android:id="@+id/tv_stock_in_qty"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/slate_900"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btn_stock_in_qty_plus"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_badge_pending"
+                        android:src="@drawable/ic_add"
+                        android:contentDescription="@null"
+                        app:tint="@color/slate_700" />
+                </LinearLayout>
+
+                <!-- 确认入库按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_confirm_stock_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/scan_btn_confirm_stock_in"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:cornerRadius="10dp"
+                    app:backgroundTint="#059669"
+                    android:enabled="false"
+                    android:alpha="0.5" />
+            </LinearLayout>
+
+            <!-- 出库操作专属面板 -->
+            <LinearLayout
+                android:id="@+id/layout_stock_out_actions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="gone">
+
+                <!-- 数量调节器 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="4dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/scan_qty_label"
+                        android:textColor="@color/slate_700"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btn_stock_out_qty_minus"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_badge_pending"
+                        android:src="@drawable/ic_remove"
+                        android:contentDescription="@null"
+                        app:tint="@color/slate_700" />
+
+                    <TextView
+                        android:id="@+id/tv_stock_out_qty"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/slate_900"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btn_stock_out_qty_plus"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_badge_pending"
+                        android:src="@drawable/ic_add"
+                        android:contentDescription="@null"
+                        app:tint="@color/slate_700" />
+                </LinearLayout>
+
+                <!-- 确认出库按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_confirm_stock_out"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/scan_btn_confirm_stock_out"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:cornerRadius="10dp"
+                    app:backgroundTint="#D97706"
+                    android:enabled="false"
+                    android:alpha="0.5" />
+            </LinearLayout>
+
+            <!-- 底部辅助按钮栏（重新扫描 / 完成） -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_rescan"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/scan_btn_rescan"
+                    android:textSize="14sp"
+                    android:textColor="@color/slate_700"
+                    app:strokeColor="@color/slate_300"
+                    app:cornerRadius="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_done"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/scan_btn_done"
+                    android:textSize="14sp"
+                    android:textColor="@color/brand_secondary"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -246,4 +246,27 @@
     <string name="btn_close">Close</string>
     <!-- 在线状态 -->
     <string name="status_online">Online</string>
+
+    <!-- Optimized Scanning Features -->
+    <string name="scan_title_stock_in">Stock In Scan</string>
+    <string name="scan_title_stock_out">Stock Out Scan</string>
+    <string name="scan_title_camera">Barcode / QR Scanner</string>
+    <string name="scan_viewfinder_hint">Align barcode or QR code within the frame above</string>
+    <string name="scan_status_waiting">Waiting</string>
+    <string name="scan_status_identified">Identified</string>
+    <string name="scan_info_card_title">Scanned Info &amp; Cargo Details</string>
+    <string name="scan_btn_copy">Copy Info</string>
+    <string name="scan_copied_to_clipboard">Scan info and barcode copied to clipboard</string>
+    <string name="scan_btn_confirm_stock_in">Confirm Stock In</string>
+    <string name="scan_btn_confirm_stock_out">Confirm Stock Out</string>
+    <string name="scan_btn_rescan">Rescan</string>
+    <string name="scan_btn_done">Done</string>
+    <string name="scan_qty_label">Operation Qty</string>
+    <string name="scan_placeholder_hint">Waiting to scan...\nPoint the viewfinder at a barcode or QR code. Cargo specifications, SKU, and location will appear here.</string>
+    <string name="scan_success_stock_in_format">Stock In Confirmed: %1$s +%2$d (Current: %3$d)</string>
+    <string name="scan_success_stock_out_format">Stock Out Confirmed: %1$s -%2$d (Current: %3$d)</string>
+    <string name="scan_stock_out_insufficient">Stock Out Failed: Insufficient stock (Only %d remaining)</string>
+    <string name="scan_torch_on">Flash On</string>
+    <string name="scan_torch_off">Flash Off</string>
+    <string name="scan_camera_permission_required">Camera permission is required for barcode scanning</string>
 </resources>

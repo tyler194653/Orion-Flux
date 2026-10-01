@@ -48,6 +48,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.scanner.ScannerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mobileemployeesimple.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
