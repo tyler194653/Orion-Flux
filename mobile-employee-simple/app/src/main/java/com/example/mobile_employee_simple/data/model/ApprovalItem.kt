@@ -28,7 +28,12 @@ enum class ApprovalStatus(
     REJECTED(
         R.string.approval_status_rejected,
         R.color.status_critical_text,
-        R.drawable.bg_badge_pending
+        R.drawable.bg_badge_rejected
+    ),
+    WITHDRAWN(
+        R.string.approval_status_withdrawn,
+        R.color.status_neutral_text,
+        R.drawable.bg_badge_withdrawn
     )
 }
 
@@ -37,5 +42,12 @@ data class ApprovalItem(
     val title: String,
     val meta: String,
     val desc: String,
-    var status: ApprovalStatus
-)
+    var status: ApprovalStatus,
+    val category: String = "",
+    val details: String = "",
+    val approver: String = "",
+    val timeline: String = ""
+) {
+    val canWithdraw: Boolean
+        get() = status == ApprovalStatus.PENDING || status == ApprovalStatus.IN_PROGRESS
+}

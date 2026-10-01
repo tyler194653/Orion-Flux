@@ -73,7 +73,7 @@
             android:background="@color/divider_line"
             android:layout_marginBottom="12dp" />
 
-        <!-- Actions -->
+        <!-- Actions: Request Details & Withdraw -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,22 +81,24 @@
             android:gravity="end">
 
             <Button
-                android:id="@+id/btn_reject"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/btn_details"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="@string/approvals_btn_reject"
-                android:textColor="@color/status_critical_text"
+                android:layout_height="38dp"
+                android:text="@string/request_btn_details"
+                android:textColor="?attr/colorOnSurface"
+                app:strokeColor="@color/slate_700"
+                android:textSize="13sp"
                 android:layout_marginEnd="8dp" />
 
             <Button
-                android:id="@+id/btn_approve"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:id="@+id/btn_withdraw"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:backgroundTint="@color/brand_secondary"
-                android:text="@string/approvals_btn_approve"
-                android:textColor="@color/white" />
+                android:layout_height="38dp"
+                android:text="@string/request_btn_withdraw"
+                android:textColor="@color/status_critical_text"
+                android:textSize="13sp" />
         </LinearLayout>
 
     </LinearLayout>

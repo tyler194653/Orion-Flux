@@ -18,7 +18,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Product Catalog</string>
     <string name="menu_ai_chat">AI Chat</string>
-    <string name="menu_approvals">Approvals</string>
+    <string name="menu_approvals">Requests</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_system_group">System Settings</string>
 
@@ -66,8 +66,8 @@
     <string name="workbench_camera_desc">Barcode &amp; Evidence</string>
     <string name="workbench_catalog">Product Catalog</string>
     <string name="workbench_catalog_desc">Material Specs &amp; Standards</string>
-    <string name="workbench_approvals">Approvals Center</string>
-    <string name="workbench_approvals_desc">Purchase &amp; Dispatch</string>
+    <string name="workbench_approvals">Request Center</string>
+    <string name="workbench_approvals_desc">Personal requests &amp; supplies</string>
     <string name="workbench_reports">Data Reports</string>
     <string name="workbench_reports_desc">KPI &amp; Volume Stats</string>
     <string name="workbench_ai_assistant">AI Assistant</string>
@@ -155,17 +155,39 @@
     <string name="gallery_title">Product Catalog</string>
     <string name="gallery_description">This is the product catalog page</string>
 
-    <!-- Approvals Screen -->
-    <string name="approvals_title">Enterprise Approvals</string>
-    <string name="approvals_subtitle">Streamlining procurement, inbound, and requisition orders</string>
+    <!-- Employee Request Module -->
+    <string name="approvals_title">My Work Requests</string>
+    <string name="approvals_subtitle">Personal requests for supplies, overtime, and expenses</string>
     <string name="approvals_btn_reject">Reject</string>
     <string name="approvals_btn_approve">Approve</string>
     <string name="approval_status_pending">Pending</string>
     <string name="approval_status_in_progress">In Progress</string>
     <string name="approval_status_completed">Approved</string>
     <string name="approval_status_rejected">Rejected</string>
+    <string name="approval_status_withdrawn">Withdrawn</string>
     <string name="approvals_toast_approved">Approved request: %s</string>
     <string name="approvals_toast_rejected">Rejected request: %s</string>
+    <string name="request_btn_details">Details</string>
+    <string name="request_btn_withdraw">Withdraw</string>
+    <string name="request_btn_withdrawn">Withdrawn</string>
+    <string name="request_btn_completed">Completed</string>
+    <string name="btn_submit_request">Submit Request</string>
+    <string name="dialog_details_title">Request Details &amp; Audit Trail</string>
+    <string name="dialog_withdraw_title">Confirm Withdrawal</string>
+    <string name="dialog_withdraw_message">Are you sure you want to withdraw this request? The approval workflow will be terminated.</string>
+    <string name="dialog_withdraw_confirm">Withdraw</string>
+    <string name="toast_withdraw_success">Request withdrawn successfully</string>
+    <string name="toast_withdraw_failed_status">Cannot withdraw request in current status</string>
+    <string name="dialog_new_request_title">Submit New Request</string>
+    <string name="dialog_new_request_type_prompt">Select Request Category</string>
+    <string name="dialog_new_request_title_hint">Request title (e.g., Scanner Requisition)</string>
+    <string name="dialog_new_request_desc_hint">Detailed description (specs, quantity, reason, etc.)</string>
+    <string name="dialog_new_request_type_supplies">Supplies &amp; PPE Requisition</string>
+    <string name="dialog_new_request_type_overtime">Overtime Comp Time Request</string>
+    <string name="dialog_new_request_type_reimbursement">Expense Reimbursement</string>
+    <string name="dialog_new_request_type_incident">Incident &amp; Damage Report</string>
+    <string name="toast_submit_success">Request submitted successfully into review pipeline</string>
+    <string name="toast_input_required">Please enter a valid title and description</string>
 
     <!-- Profile Screen -->
     <string name="profile_dept_role_default">Supply Chain Operations · Senior Warehouse Lead</string>
@@ -191,7 +213,7 @@
     <!-- Workbench Dialogs -->
     <string name="workbench_task_dispatch_title">Urgent Shipping Task #SO-9921</string>
     <string name="workbench_task_dispatch_content">• Client: East China Precision Mfg\n• Target: 48 boxes high-strength fasteners\n• Status: Awaiting loading check (High Priority)\n• Outbound Bay: Dock 03</string>
-    <string name="workbench_task_dispatch_btn_approvals">Go to Approvals</string>
+    <string name="workbench_task_dispatch_btn_approvals">Go to Requests</string>
     <string name="workbench_task_dispatch_btn_start">Start Review</string>
     <string name="workbench_task_dispatch_btn_later">Later</string>
     <string name="workbench_task_dispatch_toast">Assigned loading work order and notified Dock 03</string>

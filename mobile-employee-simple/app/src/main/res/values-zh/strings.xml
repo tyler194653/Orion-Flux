@@ -18,7 +18,7 @@
     <string name="menu_home">主页</string>
     <string name="menu_gallery">产品图鉴</string>
     <string name="menu_ai_chat">AI 助手</string>
-    <string name="menu_approvals">审批流</string>
+    <string name="menu_approvals">申请</string>
     <string name="menu_profile">个人中心</string>
     <string name="menu_system_group">系统设置</string>
 
@@ -66,8 +66,8 @@
     <string name="workbench_camera_desc">条码识别/留证</string>
     <string name="workbench_catalog">产品图鉴</string>
     <string name="workbench_catalog_desc">物料标准与规格</string>
-    <string name="workbench_approvals">审批流中心</string>
-    <string name="workbench_approvals_desc">采购/货损/调拨审批</string>
+    <string name="workbench_approvals">申请中心</string>
+    <string name="workbench_approvals_desc">个人事务与物料申领</string>
     <string name="workbench_reports">数据报表</string>
     <string name="workbench_reports_desc">KPI/出入库统计</string>
     <string name="workbench_ai_assistant">AI 业务助手</string>
@@ -155,17 +155,39 @@
     <string name="gallery_title">产品图鉴</string>
     <string name="gallery_description">这是产品图鉴页面</string>
 
-    <!-- 审批流界面 -->
-    <string name="approvals_title">企业审批流</string>
-    <string name="approvals_subtitle">高效流转采购、入库与物资申领工单</string>
+    <!-- 员工申请模块 -->
+    <string name="approvals_title">我的工作申请</string>
+    <string name="approvals_subtitle">个人发起的调休、加班、物料领用与报销申请</string>
     <string name="approvals_btn_reject">驳回</string>
     <string name="approvals_btn_approve">通过审批</string>
     <string name="approval_status_pending">待审批</string>
-    <string name="approval_status_in_progress">流转中</string>
+    <string name="approval_status_in_progress">审批中</string>
     <string name="approval_status_completed">已通过</string>
     <string name="approval_status_rejected">已驳回</string>
+    <string name="approval_status_withdrawn">已撤回</string>
     <string name="approvals_toast_approved">已通过审批: %s</string>
     <string name="approvals_toast_rejected">已驳回工单: %s</string>
+    <string name="request_btn_details">申请细节</string>
+    <string name="request_btn_withdraw">撤回申请</string>
+    <string name="request_btn_withdrawn">已撤回</string>
+    <string name="request_btn_completed">已办结</string>
+    <string name="btn_submit_request">提交申请</string>
+    <string name="dialog_details_title">申请细节与流转记录</string>
+    <string name="dialog_withdraw_title">撤回确认</string>
+    <string name="dialog_withdraw_message">确定要撤回该申请吗？撤回后当前审批流程将立即终止。</string>
+    <string name="dialog_withdraw_confirm">确认撤回</string>
+    <string name="toast_withdraw_success">申请已成功撤回</string>
+    <string name="toast_withdraw_failed_status">当前状态不可撤回</string>
+    <string name="dialog_new_request_title">发起新工作申请</string>
+    <string name="dialog_new_request_type_prompt">选择申请类别</string>
+    <string name="dialog_new_request_title_hint">申请标题（例如：领用扫码枪/9月28日加班）</string>
+    <string name="dialog_new_request_desc_hint">详细说明（规格、数量、原由、使用场景等）</string>
+    <string name="dialog_new_request_type_supplies">工器具与防护耗材申领</string>
+    <string name="dialog_new_request_type_overtime">延时加班调休申请</string>
+    <string name="dialog_new_request_type_reimbursement">差旅与公杂费用报销</string>
+    <string name="dialog_new_request_type_incident">作业异常与损耗报备</string>
+    <string name="toast_submit_success">申请提交成功，已进入初审流程</string>
+    <string name="toast_input_required">请填写完整的申请标题与说明</string>
 
     <!-- 个人中心 -->
     <string name="profile_dept_role_default">供应链运营部 · 资深仓储主管</string>
@@ -191,7 +213,7 @@
     <!-- 工作台弹窗 -->
     <string name="workbench_task_dispatch_title">加急发运任务 #SO-9921</string>
     <string name="workbench_task_dispatch_content">• 客户: 华东精密制造中心\n• 目标件数: 48 箱高强度连接件\n• 状态: 待装车复核 (高优先级)\n• 出库通道: Dock 03</string>
-    <string name="workbench_task_dispatch_btn_approvals">前往审批流处理</string>
+    <string name="workbench_task_dispatch_btn_approvals">前往申请流处理</string>
     <string name="workbench_task_dispatch_btn_start">开始复核</string>
     <string name="workbench_task_dispatch_btn_later">稍后处理</string>
     <string name="workbench_task_dispatch_toast">已分配装车工单并通知 Dock 03</string>
