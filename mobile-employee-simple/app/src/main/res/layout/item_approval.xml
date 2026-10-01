@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="?attr/colorSurface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header: Title and Status Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/approval_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="紧急采购补货申请"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface" />
+
+            <TextView
+                android:id="@+id/approval_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待审批"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_badge_pending"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp" />
+        </LinearLayout>
+
+        <!-- Department and Submit Date -->
+        <TextView
+            android:id="@+id/approval_meta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="仓储一部 · 提交于 2026-09-30"
+            android:textSize="12sp"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/approval_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="申请补充 SKU002 (减速齿轮箱总成) 50 箱，预算 ¥24,500。"
+            android:textSize="14sp"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginBottom="12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_line"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btn_reject"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="驳回"
+                android:textColor="@color/status_critical_text"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btn_approve"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:backgroundTint="@color/brand_secondary"
+                android:text="通过审批"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

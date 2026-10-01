@@ -12,6 +12,24 @@
         tools:layout="@layout/fragment_workbench" />
 
     <fragment
+        android:id="@+id/nav_ai_chat"
+        android:name="com.example.mobile_employee_simple.ui.chat.AIChatFragment"
+        android:label="@string/menu_ai_chat"
+        tools:layout="@layout/fragment_ai_chat" />
+
+    <fragment
+        android:id="@+id/nav_approvals"
+        android:name="com.example.mobile_employee_simple.ui.approvals.ApprovalsFragment"
+        android:label="@string/menu_approvals"
+        tools:layout="@layout/fragment_approvals" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.mobile_employee_simple.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
         android:id="@+id/nav_camera"
         android:name="com.example.mobile_employee_simple.ui.camera.CameraFragment"
         android:label="@string/menu_camera"

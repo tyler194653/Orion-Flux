@@ -5,22 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.mobile_employee_simple.R
+import com.example.mobile_employee_simple.databinding.FragmentWorkbenchBinding
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
 
 class WorkbenchFragment : Fragment() {
+
+    private var _binding: FragmentWorkbenchBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_workbench, container, false)
+    ): View {
+        _binding = FragmentWorkbenchBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,69 +35,80 @@ class WorkbenchFragment : Fragment() {
             return
         }
 
-        val titleText = view.findViewById<TextView>(R.id.workbench_title)
-        val taskListButton = view.findViewById<Button>(R.id.task_list_button)
-        val inventoryButton = view.findViewById<Button>(R.id.inventory_button)
-        val cameraButton = view.findViewById<Button>(R.id.camera_button)
-        val reportsButton = view.findViewById<Button>(R.id.reports_button)
+        val currentUser = LoginViewModel.getCurrentUser(requireContext()) ?: "仓储主管"
+        binding.workbenchWelcomeText.text = "您好，$currentUser"
 
-        titleText.text = getString(R.string.workbench_title)
-
-        // 任务列表
-        taskListButton.setOnClickListener {
-            showTaskListDialog()
+        // 2x2 业务卡片点击事件
+        // 1. 库存管理
+        binding.cardInventory.setOnClickListener {
+            findNavController().navigate(R.id.nav_inventory)
         }
 
-        // 库存管理
-        inventoryButton.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.nav_inventory)
+        // 2. 扫码拍照
+        binding.cardCamera.setOnClickListener {
+            findNavController().navigate(R.id.nav_camera)
         }
 
-        // 扫码与拍照盘点
-        cameraButton.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.nav_camera)
+        // 3. 产品图鉴
+        binding.cardCatalog.setOnClickListener {
+            findNavController().navigate(R.id.nav_gallery)
         }
 
-        // 报表统计
-        reportsButton.setOnClickListener {
+        // 4. 数据报表
+        binding.cardReports.setOnClickListener {
             showReportsDialog()
+        }
+
+        // 今日作业任务点击事件
+        binding.taskInventoryCheck.setOnClickListener {
+            Toast.makeText(requireContext(), "正在进入 A区-01 盘点任务...", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.nav_inventory)
+        }
+
+        binding.taskOrderDispatch.setOnClickListener {
+            showTaskDispatchDialog()
+        }
+
+        binding.taskQualityCheck.setOnClickListener {
+            showTaskQualityDialog()
         }
     }
 
     private fun showLoginRequired() {
         Toast.makeText(context, getString(R.string.workbench_login_required), Toast.LENGTH_SHORT).show()
-        val navController = Navigation.findNavController(requireView())
-        navController.navigate(R.id.nav_login)
+        findNavController().navigate(R.id.nav_login)
     }
 
-    private fun showTaskListDialog() {
-        val tasks = arrayOf(
-            "📋 A区库存盘点 [高优先级 · 进行中]",
-            "📦 今日新订单发货处理 [中优先级 · 待处理]",
-            "🔍 B批次产品抽检 [低优先级 · 已完成]",
-            "⚙️ 仓储传送设备定期维护 [中优先级 · 待处理]"
-        )
-
+    private fun showTaskDispatchDialog() {
         AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.workbench_task_list))
-            .setItems(tasks) { _, which ->
-                when (which) {
-                    0 -> {
-                        // 跳转到库存管理
-                        Navigation.findNavController(requireView()).navigate(R.id.nav_inventory)
-                    }
-                    1 -> {
-                        Toast.makeText(requireContext(), "已打开订单发货任务详情", Toast.LENGTH_SHORT).show()
-                    }
-                    2 -> {
-                        Toast.makeText(requireContext(), "B批次抽检已归档", Toast.LENGTH_SHORT).show()
-                    }
-                    3 -> {
-                        Toast.makeText(requireContext(), "设备维护工单已下发", Toast.LENGTH_SHORT).show()
-                    }
-                }
+            .setTitle("加急发运任务 #SO-9921")
+            .setMessage("""
+                • 客户: 华东精密制造中心
+                • 目标件数: 48 箱高强度连接件
+                • 状态: 待装车复核 (高优先级)
+                • 出库通道: Dock 03
+            """.trimIndent())
+            .setPositiveButton("开始复核") { _, _ ->
+                Toast.makeText(requireContext(), "已分配装车工单并通知 Dock 03", Toast.LENGTH_SHORT).show()
             }
-            .setPositiveButton(android.R.string.ok, null)
+            .setNegativeButton("稍后处理", null)
+            .show()
+    }
+
+    private fun showTaskQualityDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("零件质量抽检报告")
+            .setMessage("""
+                • 批次号: 2026-B-88301
+                • 抽检数量: 120 件
+                • 合格率: 100% (公差均在 ±0.02mm 内)
+                • 检验员: QA-07 (已签名确认)
+                • 状态: 已归档
+            """.trimIndent())
+            .setPositiveButton("查看报告详情") { _, _ ->
+                Toast.makeText(requireContext(), "质检记录已上链同步至 ERP", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("关闭", null)
             .show()
     }
 
@@ -106,13 +120,13 @@ class WorkbenchFragment : Fragment() {
             • 待处理任务: 3 件
 
             📦 核心库存状况:
-            • 产品A: 100个 (正常)
-            • 产品B: 50箱 (⚠️ 低库存预警)
-            • 产品C: 200件 (正常)
+            • 轴承组 A: 1,420 套 (正常)
+            • 传感器组件: 58 组 (⚠️ 低库存预警)
+            • 传动皮带: 310 条 (正常)
 
             🎯 质量指标:
-            • 综合合格率: 98.5%
-            • 抽检返工率: 1.2%
+            • 综合合格率: 99.4%
+            • 出库准时率: 98.8%
         """.trimIndent()
 
         AlertDialog.Builder(requireContext())
@@ -121,4 +135,9 @@ class WorkbenchFragment : Fragment() {
             .setPositiveButton(android.R.string.ok, null)
             .show()
     }
-} 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

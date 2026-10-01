@@ -1,28 +1,42 @@
 package com.example.mobile_employee_simple
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
 import com.example.mobile_employee_simple.databinding.ActivityMainBinding
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
-import com.example.mobile_employee_simple.ui.auth.LoginFragment
-import androidx.fragment.app.commit
-import android.util.Log
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private val topLevelDestinations = setOf(
+        R.id.nav_workbench,
+        R.id.nav_ai_chat,
+        R.id.nav_approvals,
+        R.id.nav_profile
+    )
+
+    private fun getNavController(): NavController {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        return navHostFragment.navController
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,93 +48,66 @@ class MainActivity : AppCompatActivity() {
             // 设置 toolbar
             setSupportActionBar(binding.appBarMain.toolbar)
 
-            binding.appBarMain.fab.setOnClickListener { view ->
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null)
-                    .setAnchorView(R.id.fab).show()
-            }
-            
             val drawerLayout: DrawerLayout = binding.drawerLayout
             val navView: NavigationView = binding.navView
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            val bottomNav = binding.appBarMain.contentMain.bottomNavigation
+            val navController = getNavController()
             
             // 检查登录状态
             val isLoggedIn = LoginViewModel.isLoggedIn(this)
             
             if (isLoggedIn) {
-                // 已登录：启用侧边导航，设置所有页面为顶级目标
-                appBarConfiguration = AppBarConfiguration(
-                    setOf(
-                        R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_gallery, R.id.nav_settings, R.id.nav_user_info
-                    ), drawerLayout
-                )
-                
-                // 设置 ActionBar 导航
+                appBarConfiguration = AppBarConfiguration(topLevelDestinations, drawerLayout)
                 setupActionBarWithNavController(navController, appBarConfiguration)
                 navView.setupWithNavController(navController)
+                bottomNav.setupWithNavController(navController)
                 
-                // 如果当前在登录页面，跳转到Home页面
                 if (navController.currentDestination?.id == R.id.nav_login) {
-                    navController.navigate(R.id.nav_home)
+                    navController.navigate(R.id.nav_workbench)
                 }
             } else {
-                // 未登录：禁用侧边导航，只允许登录页面
-                appBarConfiguration = AppBarConfiguration(
-                    setOf(R.id.nav_login), drawerLayout
-                )
-                
-                // 设置 ActionBar 导航
+                appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_login), drawerLayout)
                 setupActionBarWithNavController(navController, appBarConfiguration)
+                bottomNav.setupWithNavController(navController)
                 
-                // 禁用侧边导航
-                navView.setEnabled(false)
+                navView.isEnabled = false
+                bottomNav.visibility = View.GONE
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
             
             navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (destination.id == R.id.nav_login) {
-                    // 登录页面：完全隐藏ActionBar，锁定抽屉
-                    supportActionBar?.hide()
-                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                    
-                    // 禁用侧边导航
-                    navView.setEnabled(false)
-                } else {
-                    // 其他页面：显示ActionBar，解锁抽屉
-                    supportActionBar?.show()
-                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                    
-                    // 启用侧边导航
-                    navView.setEnabled(true)
-                    
-                    // 重新配置AppBarConfiguration，设置所有页面为顶级目标
-                    appBarConfiguration = AppBarConfiguration(
-                        setOf(
-                            R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_gallery, R.id.nav_settings, R.id.nav_user_info
-                        ), drawerLayout
-                    )
-                    setupActionBarWithNavController(navController, appBarConfiguration)
+                when (destination.id) {
+                    R.id.nav_login -> {
+                        supportActionBar?.hide()
+                        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                        navView.isEnabled = false
+                        bottomNav.visibility = View.GONE
+                    }
+                    R.id.nav_camera -> {
+                        supportActionBar?.show()
+                        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                        bottomNav.visibility = View.GONE
+                    }
+                    else -> {
+                        supportActionBar?.show()
+                        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                        navView.isEnabled = true
+                        bottomNav.visibility = View.VISIBLE
+                    }
                 }
             }
             
             navView.setNavigationItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
-                    R.id.nav_user_info -> {
-                        val navController = findNavController(R.id.nav_host_fragment_content_main)
-                        navController.navigate(R.id.nav_user_info)
-                        binding.drawerLayout.closeDrawers()
-                        true
-                    }
                     R.id.nav_logout -> {
                         logout()
                         binding.drawerLayout.closeDrawers()
                         true
                     }
                     else -> {
-                        // 默认交给Navigation组件处理
                         val handled = try {
-                            val navController = findNavController(R.id.nav_host_fragment_content_main)
                             navController.navigate(menuItem.itemId)
                             true
                         } catch (e: Exception) {
@@ -134,13 +121,12 @@ class MainActivity : AppCompatActivity() {
             
         } catch (e: Exception) {
             Toast.makeText(this, "onCreate异常: " + e.message, Toast.LENGTH_LONG).show()
-            Log.e("MainActivityTest", "onCreate异常", e)
+            Log.e("MainActivity", "onCreate异常", e)
             e.printStackTrace()
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -152,9 +138,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_settings -> {
-                // 跳转到设置页面
-                val navController = findNavController(R.id.nav_host_fragment_content_main)
-                navController.navigate(R.id.nav_settings)
+                getNavController().navigate(R.id.nav_settings)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -166,18 +150,15 @@ class MainActivity : AppCompatActivity() {
         val isLoggedIn = LoginViewModel.isLoggedIn(this)
         
         if (isLoggedIn) {
-            // 显示用户信息和登出选项
             val options = arrayOf("当前用户: $currentUser", "退出登录")
-            android.app.AlertDialog.Builder(this)
+            AlertDialog.Builder(this)
                 .setTitle("用户信息")
                 .setItems(options) { _, which ->
                     when (which) {
                         0 -> {
-                            // 显示用户详细信息
                             Toast.makeText(this, "当前用户: $currentUser", Toast.LENGTH_SHORT).show()
                         }
                         1 -> {
-                            // 退出登录
                             logout()
                         }
                     }
@@ -193,38 +174,33 @@ class MainActivity : AppCompatActivity() {
         LoginViewModel.logout(this)
         Toast.makeText(this, "已退出登录", Toast.LENGTH_SHORT).show()
         
-        // 跳转到登录页面
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        val navOptions = androidx.navigation.NavOptions.Builder()
-            .setPopUpTo(R.id.nav_home, true)
+        val navController = getNavController()
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.mobile_navigation, true)
             .build()
         navController.navigate(R.id.nav_login, null, navOptions)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navController = getNavController()
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
     
-    // 登录成功后调用此方法启用侧边导航
+    // 登录成功后调用此方法启用导航与底部导航栏
     fun enableNavigationAfterLogin() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val bottomNav = binding.appBarMain.contentMain.bottomNavigation
+        val navController = getNavController()
         
-        // 重新配置导航
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_workbench, R.id.nav_camera, R.id.nav_inventory, R.id.nav_gallery, R.id.nav_settings, R.id.nav_user_info
-            ), drawerLayout
-        )
+        appBarConfiguration = AppBarConfiguration(topLevelDestinations, drawerLayout)
         
-        // 重新设置 ActionBar 导航
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        bottomNav.setupWithNavController(navController)
         
-        // 启用侧边导航
-        navView.setEnabled(true)
+        navView.isEnabled = true
+        bottomNav.visibility = View.VISIBLE
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 }

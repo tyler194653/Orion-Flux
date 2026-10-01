@@ -14,6 +14,9 @@
     <string name="menu_settings">设置</string>
     <string name="menu_home">主页</string>
     <string name="menu_gallery">产品图鉴</string>
+    <string name="menu_ai_chat">AI 助手</string>
+    <string name="menu_approvals">审批流</string>
+    <string name="menu_profile">个人中心</string>
 
     <!-- 登录界面 -->
     <string name="login_title">供应链员工端</string>

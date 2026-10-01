@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <!-- Brand Palette (Jules Design System) -->
+    <color name="brand_primary">#0F172A</color> <!-- Slate 900 -->
+    <color name="brand_primary_dark">#020617</color> <!-- Slate 950 -->
+    <color name="brand_secondary">#2563EB</color> <!-- Blue 600 -->
+    <color name="brand_secondary_light">#3B82F6</color> <!-- Blue 500 -->
+
+    <!-- Base Neutrals -->
     <color name="white">#FFFFFFFF</color>
-    
-    <!-- Material Design 主题颜色 -->
-    <color name="colorPrimary">@color/purple_500</color>
-    <color name="colorPrimaryVariant">@color/purple_700</color>
+    <color name="black">#FF000000</color>
+    <color name="slate_50">#F8FAFC</color>
+    <color name="slate_100">#F1F5F9</color>
+    <color name="slate_200">#E2E8F0</color>
+    <color name="slate_300">#CBD5E1</color>
+    <color name="slate_400">#94A3B8</color>
+    <color name="slate_500">#64748B</color>
+    <color name="slate_600">#475569</color>
+    <color name="slate_700">#334155</color>
+    <color name="slate_800">#1E293B</color>
+    <color name="slate_900">#0F172A</color>
+
+    <!-- Legacy color aliases for backward compatibility -->
+    <color name="purple_200">#3B82F6</color>
+    <color name="purple_500">#0F172A</color>
+    <color name="purple_700">#020617</color>
+    <color name="teal_200">#2563EB</color>
+    <color name="teal_700">#1D4ED8</color>
+
+    <color name="colorPrimary">@color/brand_primary</color>
+    <color name="colorPrimaryVariant">@color/brand_primary_dark</color>
     <color name="colorOnPrimary">@color/white</color>
-    <color name="colorSecondary">@color/teal_200</color>
-    <color name="colorSecondaryVariant">@color/teal_700</color>
-    <color name="colorOnSecondary">@color/black</color>
+    <color name="colorSecondary">@color/brand_secondary</color>
+    <color name="colorSecondaryVariant">@color/brand_secondary_light</color>
+    <color name="colorOnSecondary">@color/white</color>
     <color name="colorSurface">@color/white</color>
-    <color name="colorOnSurface">@color/black</color>
-    <color name="colorOnSurfaceVariant">#FF666666</color>
-    <color name="colorError">#FFB00020</color>
+    <color name="colorOnSurface">@color/slate_900</color>
+    <color name="colorOnSurfaceVariant">@color/slate_600</color>
+    <color name="colorError">#BE123C</color>
     <color name="colorOnError">@color/white</color>
-    <color name="colorBackground">@color/white</color>
-    <color name="colorOnBackground">@color/black</color>
+    <color name="colorBackground">@color/slate_50</color>
+    <color name="colorOnBackground">@color/slate_900</color>
+
+    <!-- Semantic Status Badges (Jules Tokens) -->
+    <color name="status_pending_bg">#FEF3C7</color>
+    <color name="status_pending_text">#B45309</color>
+    <color name="status_in_progress_bg">#DBEAFE</color>
+    <color name="status_in_progress_text">#1D4ED8</color>
+    <color name="status_completed_bg">#D1FAE5</color>
+    <color name="status_completed_text">#047857</color>
+    <color name="status_critical_bg">#FFE4E6</color>
+    <color name="status_critical_text">#BE123C</color>
+    <color name="status_neutral_bg">#F1F5F9</color>
+    <color name="status_neutral_text">#475569</color>
+
+    <!-- Adaptive Theme Elements -->
+    <color name="chat_ai_bg">@color/white</color>
+    <color name="chat_border">@color/slate_200</color>
+    <color name="chat_input_bg">#0D000000</color>
+    <color name="divider_line">@color/slate_200</color>
 </resources>

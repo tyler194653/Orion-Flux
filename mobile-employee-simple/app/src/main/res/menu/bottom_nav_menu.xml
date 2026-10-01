@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_workbench"
+        android:icon="@drawable/ic_nav_workbench"
+        android:title="@string/menu_workbench" />
+    <item
+        android:id="@+id/nav_ai_chat"
+        android:icon="@drawable/ic_nav_ai_chat"
+        android:title="@string/menu_ai_chat" />
+    <item
+        android:id="@+id/nav_approvals"
+        android:icon="@drawable/ic_nav_approvals"
+        android:title="@string/menu_approvals" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_nav_profile"
+        android:title="@string/menu_profile" />
+</menu>

@@ -145,7 +145,7 @@ class LoginFragment : Fragment() {
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.nav_login, true)
             .build()
-        navController.navigate(R.id.nav_home, null, navOptions)
+        navController.navigate(R.id.nav_workbench, null, navOptions)
     }
 
     override fun onDestroyView() {

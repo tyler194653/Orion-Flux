@@ -1,49 +1,418 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="?android:attr/windowBackground">
 
-    <TextView
-        android:id="@+id/workbench_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/workbench_title"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
-
-    <Button
-        android:id="@+id/task_list_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/workbench_task_list"
-        android:layout_marginBottom="16dp"
-        android:padding="16dp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/inventory_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/workbench_inventory"
-        android:layout_marginBottom="16dp"
-        android:padding="16dp" />
+        <!-- Welcome Banner Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/brand_primary"
+            android:layout_marginBottom="16dp">
 
-    <Button
-        android:id="@+id/camera_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/workbench_camera"
-        android:layout_marginBottom="16dp"
-        android:padding="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
 
-    <Button
-        android:id="@+id/reports_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/workbench_reports"
-        android:layout_marginBottom="16dp"
-        android:padding="16dp" />
+                <TextView
+                    android:id="@+id/workbench_welcome_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您好，仓储主管"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="4dp" />
 
-</LinearLayout> 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今日仓库运转正常 · 共有 4 项待办任务"
+                    android:textSize="13sp"
+                    android:textColor="@color/slate_300" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Quick Operations Section Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="业务快速入口"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginBottom="12dp" />
+
+        <!-- 2x2 Operations Grid -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <!-- Inventory Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_inventory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="?attr/colorSurface"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📦"
+                        android:textSize="24sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="库存管理"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="入库/出库/盘点"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Scan & Camera Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_camera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="?attr/colorSurface"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📷"
+                        android:textSize="24sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="扫码拍照"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="条码识别/留证"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <!-- Catalog Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_catalog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="?attr/colorSurface"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🖼️"
+                        android:textSize="24sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="产品图鉴"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="物料标准与规格"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Reports Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_reports"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="?attr/colorSurface"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📊"
+                        android:textSize="24sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="数据报表"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KPI/出入库统计"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Today's Tasks Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日作业任务"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Task Item 1 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/task_inventory_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            android:layout_marginBottom="8dp"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A区-01 货架精密轴承盘点"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="点击进入库存管理快速盘点"
+                        android:textSize="12sp"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="进行中"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_badge_in_progress"
+                    android:textColor="@color/status_in_progress_text"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Task Item 2 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/task_order_dispatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            android:layout_marginBottom="8dp"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="加急订单 #SO-9921 出库发运"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="待装车复核 · 优先级: 高"
+                        android:textSize="12sp"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="待处理"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_badge_pending"
+                    android:textColor="@color/status_pending_text"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Task Item 3 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/task_quality_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B批次进厂零件质量抽检"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="合格率 100% · 已归档"
+                        android:textSize="12sp"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已完成"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_badge_completed"
+                    android:textColor="@color/status_completed_text"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <!-- AI Message (Left) -->
+    <LinearLayout
+        android:id="@+id/layout_ai_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/bg_chat_ai"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🤖 AI 助手"
+            android:textColor="@color/brand_secondary"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/text_ai_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            android:lineSpacingExtra="2dp" />
+    </LinearLayout>
+
+    <!-- User Message (Right) -->
+    <LinearLayout
+        android:id="@+id/layout_user_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/bg_chat_user"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/text_user_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:lineSpacingExtra="2dp" />
+    </LinearLayout>
+
+</LinearLayout>
