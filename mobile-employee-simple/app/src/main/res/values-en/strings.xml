@@ -48,10 +48,15 @@
     <string name="workbench_inventory">Inventory Management</string>
     <string name="workbench_camera">Scan &amp; Camera</string>
     <string name="workbench_reports">Data Reports</string>
+    <string name="workbench_approvals">Approvals Center</string>
+    <string name="workbench_approvals_desc">Purchase &amp; Dispatch</string>
+    <string name="workbench_ai_assistant">AI Assistant</string>
+    <string name="workbench_ai_assistant_desc">Alerts &amp; Diagnostics</string>
     <string name="workbench_task_list_developing">Task List</string>
     <string name="workbench_reports_developing">Data Reports</string>
     <string name="workbench_inventory_developing">Inventory</string>
     <string name="workbench_login_required">Please login first</string>
+    <string name="menu_system_group">System Settings</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

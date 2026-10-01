@@ -54,9 +54,19 @@ class WorkbenchFragment : Fragment() {
             findNavController().navigate(R.id.nav_gallery)
         }
 
-        // 4. 数据报表
+        // 4. 审批流中心
+        binding.cardApprovals.setOnClickListener {
+            findNavController().navigate(R.id.nav_approvals)
+        }
+
+        // 5. 数据报表
         binding.cardReports.setOnClickListener {
             showReportsDialog()
+        }
+
+        // 6. AI 业务助手
+        binding.cardAiAssistant.setOnClickListener {
+            findNavController().navigate(R.id.nav_ai_chat)
         }
 
         // 今日作业任务点击事件
@@ -88,7 +98,10 @@ class WorkbenchFragment : Fragment() {
                 • 状态: 待装车复核 (高优先级)
                 • 出库通道: Dock 03
             """.trimIndent())
-            .setPositiveButton("开始复核") { _, _ ->
+            .setPositiveButton("前往审批流处理") { _, _ ->
+                findNavController().navigate(R.id.nav_approvals)
+            }
+            .setNeutralButton("开始复核") { _, _ ->
                 Toast.makeText(requireContext(), "已分配装车工单并通知 Dock 03", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("稍后处理", null)

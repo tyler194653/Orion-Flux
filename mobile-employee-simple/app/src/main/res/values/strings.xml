@@ -47,10 +47,15 @@
     <string name="workbench_inventory">库存管理</string>
     <string name="workbench_camera">扫码与拍照</string>
     <string name="workbench_reports">数据报表</string>
+    <string name="workbench_approvals">审批流中心</string>
+    <string name="workbench_approvals_desc">采购/货损/调拨审批</string>
+    <string name="workbench_ai_assistant">AI 业务助手</string>
+    <string name="workbench_ai_assistant_desc">库存预警与作业建议</string>
     <string name="workbench_task_list_developing">任务列表</string>
     <string name="workbench_reports_developing">报表统计</string>
     <string name="workbench_inventory_developing">库存管理</string>
     <string name="workbench_login_required">请先登录</string>
+    <string name="menu_system_group">系统设置</string>
 
     <!-- 设置 -->
     <string name="settings_title">设置</string>
