@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_employee_simple.R
+import com.example.mobile_employee_simple.data.model.InventoryItem
 
 class InventoryAdapter(
     private val onItemClick: (InventoryItem) -> Unit
 ) : RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
-    
+
     private var items = listOf<InventoryItem>()
 
     fun updateItems(newItems: List<InventoryItem>) {
@@ -34,7 +35,7 @@ class InventoryAdapter(
         itemView: View,
         private val onItemClick: (InventoryItem) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
-        
+
         private val nameText: TextView = itemView.findViewById(R.id.item_name)
         private val skuText: TextView = itemView.findViewById(R.id.item_sku)
         private val quantityText: TextView = itemView.findViewById(R.id.item_quantity)
@@ -42,15 +43,16 @@ class InventoryAdapter(
         private val lastUpdatedText: TextView = itemView.findViewById(R.id.item_last_updated)
 
         fun bind(item: InventoryItem) {
+            val context = itemView.context
             nameText.text = item.name
             skuText.text = "SKU: ${item.sku}"
             quantityText.text = "${item.quantity} ${item.unit}"
-            locationText.text = "位置: ${item.location}"
-            lastUpdatedText.text = "更新: ${item.lastUpdated}"
-            
+            locationText.text = context.getString(R.string.inventory_item_location_format, item.location)
+            lastUpdatedText.text = context.getString(R.string.inventory_item_update_format, item.lastUpdated)
+
             itemView.setOnClickListener {
                 onItemClick(item)
             }
         }
     }
-} 
+}

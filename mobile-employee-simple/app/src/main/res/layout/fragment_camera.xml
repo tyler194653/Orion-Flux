@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="相机功能"
+        android:text="@string/camera_title"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="拍照"
+            android:text="@string/camera_take_photo"
             android:layout_marginEnd="8dp" />
 
         <Button
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="选择图片"
+            android:text="@string/camera_select_image"
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="扫描二维码"
+            android:text="@string/camera_scan_qr"
             android:layout_marginEnd="8dp" />
 
         <Button
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="扫描条码"
+            android:text="@string/camera_scan_barcode"
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
@@ -78,7 +78,7 @@
         android:id="@+id/tv_scan_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="扫描结果将显示在这里"
+        android:text="@string/camera_scan_result_placeholder"
         android:visibility="gone"
         android:background="#e8f5e8"
         android:padding="12dp"
@@ -95,7 +95,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="确认"
+            android:text="@string/camera_confirm"
             android:layout_marginEnd="8dp" />
 
         <Button
@@ -103,7 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="清除"
+            android:text="@string/camera_clear"
             android:layout_marginStart="8dp" />
     </LinearLayout>
 

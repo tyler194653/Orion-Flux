@@ -6,104 +6,72 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_employee_simple.R
+import com.example.mobile_employee_simple.data.DataRepositoryProvider
+import com.example.mobile_employee_simple.data.model.ApprovalItem
+import com.example.mobile_employee_simple.data.model.ApprovalStatus
 import com.example.mobile_employee_simple.databinding.FragmentApprovalsBinding
+import com.example.mobile_employee_simple.ui.base.BaseFragment
+import kotlinx.coroutines.launch
 
-data class ApprovalItem(
-    val id: String,
-    val title: String,
-    val meta: String,
-    val desc: String,
-    var status: ApprovalStatus
-)
+class ApprovalsFragment : BaseFragment<FragmentApprovalsBinding>() {
 
-enum class ApprovalStatus {
-    PENDING,
-    IN_PROGRESS,
-    COMPLETED,
-    REJECTED
-}
-
-class ApprovalsFragment : Fragment() {
-
-    private var _binding: FragmentApprovalsBinding? = null
-    private val binding get() = _binding!!
+    private val repository = DataRepositoryProvider.approvalsRepository
     private val items = mutableListOf<ApprovalItem>()
     private lateinit var adapter: ApprovalsAdapter
 
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentApprovalsBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): FragmentApprovalsBinding {
+        return FragmentApprovalsBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (items.isEmpty()) {
-            items.addAll(
-                listOf(
-                    ApprovalItem(
-                        "PR-2026-088",
-                        "紧急采购补货申请",
-                        "仓储一部 · 提交于 2026-09-30",
-                        "申请紧急补充 SKU002 (减速齿轮箱总成) 50 箱，预算 ¥24,500。",
-                        ApprovalStatus.PENDING
-                    ),
-                    ApprovalItem(
-                        "SO-2026-042",
-                        "货损出库核销复核",
-                        "质检中心 · 提交于 2026-09-30",
-                        "申请复核并下架 A区-01 货架受潮纸箱包装配件 2 件，作退厂返工处理。",
-                        ApprovalStatus.PENDING
-                    ),
-                    ApprovalItem(
-                        "TR-2026-015",
-                        "跨库精密轴承调拨",
-                        "调度中心 · 提交于 2026-09-29",
-                        "从中央一号库向分拨二号库调配 100 套工业精密轴承，支援产线急需。",
-                        ApprovalStatus.IN_PROGRESS
-                    ),
-                    ApprovalItem(
-                        "MT-2026-003",
-                        "输送机易损备件申领",
-                        "运维工程部 · 提交于 2026-09-28",
-                        "申领高压液压接头 10 包用于 3 号传送辊道日常维保保养。",
-                        ApprovalStatus.COMPLETED
-                    )
-                )
-            )
-        }
-
         adapter = ApprovalsAdapter(
             items,
             onApprove = { item, position ->
-                item.status = ApprovalStatus.COMPLETED
-                adapter.notifyItemChanged(position)
-                Toast.makeText(context, "已通过审批: ${item.title}", Toast.LENGTH_SHORT).show()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    item.status = ApprovalStatus.COMPLETED
+                    repository.updateStatus(item.id, ApprovalStatus.COMPLETED)
+                    adapter.notifyItemChanged(position)
+                    showToast(getLocalizedString(R.string.approvals_toast_approved, item.title))
+                }
             },
             onReject = { item, position ->
-                item.status = ApprovalStatus.REJECTED
-                adapter.notifyItemChanged(position)
-                Toast.makeText(context, "已驳回工单: ${item.title}", Toast.LENGTH_SHORT).show()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    item.status = ApprovalStatus.REJECTED
+                    repository.updateStatus(item.id, ApprovalStatus.REJECTED)
+                    adapter.notifyItemChanged(position)
+                    showToast(getLocalizedString(R.string.approvals_toast_rejected, item.title))
+                }
             }
         )
 
         binding.approvalsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.approvalsRecyclerView.adapter = adapter
+
+        loadData()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onResume() {
+        super.onResume()
+        loadData()
+    }
+
+    private fun loadData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val list = repository.getApprovals()
+            items.clear()
+            items.addAll(list)
+            adapter.notifyDataSetChanged()
+        }
     }
 
     private class ApprovalsAdapter(
@@ -120,40 +88,20 @@ class ApprovalsFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = list[position]
+            val context = holder.itemView.context
+
             holder.title.text = item.title
             holder.meta.text = item.meta
             holder.desc.text = item.desc
 
-            when (item.status) {
-                ApprovalStatus.PENDING -> {
-                    holder.badge.text = "待审批"
-                    holder.badge.setBackgroundResource(R.drawable.bg_badge_pending)
-                    holder.badge.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.status_pending_text))
-                    holder.btnApprove.visibility = View.VISIBLE
-                    holder.btnReject.visibility = View.VISIBLE
-                }
-                ApprovalStatus.IN_PROGRESS -> {
-                    holder.badge.text = "流转中"
-                    holder.badge.setBackgroundResource(R.drawable.bg_badge_in_progress)
-                    holder.badge.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.status_in_progress_text))
-                    holder.btnApprove.visibility = View.VISIBLE
-                    holder.btnReject.visibility = View.VISIBLE
-                }
-                ApprovalStatus.COMPLETED -> {
-                    holder.badge.text = "已通过"
-                    holder.badge.setBackgroundResource(R.drawable.bg_badge_completed)
-                    holder.badge.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.status_completed_text))
-                    holder.btnApprove.visibility = View.GONE
-                    holder.btnReject.visibility = View.GONE
-                }
-                ApprovalStatus.REJECTED -> {
-                    holder.badge.text = "已驳回"
-                    holder.badge.setBackgroundResource(R.drawable.bg_badge_pending)
-                    holder.badge.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.status_critical_text))
-                    holder.btnApprove.visibility = View.GONE
-                    holder.btnReject.visibility = View.GONE
-                }
-            }
+            // Higher-level localization: mapped via ApprovalStatus enum resource ID
+            holder.badge.setText(item.status.titleRes)
+            holder.badge.setBackgroundResource(item.status.bgDrawableRes)
+            holder.badge.setTextColor(ContextCompat.getColor(context, item.status.textColorRes))
+
+            val isActionable = item.status == ApprovalStatus.PENDING || item.status == ApprovalStatus.IN_PROGRESS
+            holder.btnApprove.visibility = if (isActionable) View.VISIBLE else View.GONE
+            holder.btnReject.visibility = if (isActionable) View.VISIBLE else View.GONE
 
             holder.btnApprove.setOnClickListener {
                 val pos = holder.adapterPosition

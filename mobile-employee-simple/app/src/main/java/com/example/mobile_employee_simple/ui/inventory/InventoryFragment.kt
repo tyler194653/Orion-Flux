@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_employee_simple.R
+import com.example.mobile_employee_simple.data.model.InventoryItem
+import com.example.mobile_employee_simple.data.model.InventoryOperationResult
 import com.example.mobile_employee_simple.databinding.FragmentInventoryBinding
 import com.example.mobile_employee_simple.services.CameraService
 import com.example.mobile_employee_simple.services.LocationService
@@ -61,7 +63,7 @@ class InventoryFragment : Fragment() {
     }
     
     private fun showLoginRequired() {
-        Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.inventory_login_required), Toast.LENGTH_SHORT).show()
         val loginFragment = LoginFragment()
         parentFragmentManager.commit {
             replace(R.id.nav_host_fragment_content_main, loginFragment)
@@ -71,7 +73,7 @@ class InventoryFragment : Fragment() {
     
     private fun setupUI() {
         binding.apply {
-            inventoryTitle.text = "库存管理"
+            inventoryTitle.text = getString(R.string.inventory_title)
             
             // 返回按钮
             backButton.setOnClickListener {
@@ -165,7 +167,7 @@ class InventoryFragment : Fragment() {
                 IntentIntegrator.EAN_8,
                 IntentIntegrator.QR_CODE
             )
-            setPrompt("扫描产品条码进行入库")
+            setPrompt(getString(R.string.inventory_scan_in_prompt))
             setCameraId(0)
             setBeepEnabled(true)
             setBarcodeImageEnabled(true)
@@ -183,7 +185,7 @@ class InventoryFragment : Fragment() {
                 IntentIntegrator.EAN_8,
                 IntentIntegrator.QR_CODE
             )
-            setPrompt("扫描产品条码进行出库")
+            setPrompt(getString(R.string.inventory_scan_out_prompt))
             setCameraId(0)
             setBeepEnabled(true)
             setBarcodeImageEnabled(true)
@@ -193,22 +195,22 @@ class InventoryFragment : Fragment() {
     
     private fun startInventoryCheck() {
         // TODO: 启动库存盘点流程
-        Toast.makeText(context, "库存盘点功能开发中", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.inventory_check_developing), Toast.LENGTH_SHORT).show()
     }
     
     private fun showLocationManagement() {
         // TODO: 显示货位管理界面
-        Toast.makeText(context, "货位管理功能开发中", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.inventory_location_developing), Toast.LENGTH_SHORT).show()
     }
     
     private fun showSearchDialog() {
         // TODO: 显示搜索对话框
-        Toast.makeText(context, "搜索功能开发中", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.inventory_search_developing), Toast.LENGTH_SHORT).show()
     }
     
     private fun showInventoryDetail(item: InventoryItem) {
         // TODO: 显示库存详情
-        Toast.makeText(context, "查看详情: ${item.name}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "${getString(R.string.inventory_title)}: ${item.name}", Toast.LENGTH_SHORT).show()
     }
     
     private fun handleScanResult(result: String) {
@@ -224,7 +226,7 @@ class InventoryFragment : Fragment() {
                 inventoryViewModel.processStockOut(scanData)
             }
             else -> {
-                Toast.makeText(context, "扫描结果: $result", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.camera_scan_result_format, result), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -233,7 +235,7 @@ class InventoryFragment : Fragment() {
         // TODO: 解析扫描结果，提取产品信息
         return ScanData(
             productId = result,
-            productName = "产品$result",
+            productName = "SKU-$result",
             quantity = 1
         )
     }
@@ -246,7 +248,7 @@ class InventoryFragment : Fragment() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Toast.makeText(context, "扫描取消", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.camera_scan_canceled), Toast.LENGTH_SHORT).show()
             } else {
                 inventoryViewModel.setScanResult(result.contents)
             }
@@ -271,19 +273,4 @@ class InventoryFragment : Fragment() {
         val productName: String,
         val quantity: Int
     )
-}
-
-data class InventoryItem(
-    val id: String,
-    val name: String,
-    val sku: String,
-    val quantity: Int,
-    val unit: String,
-    val location: String = "",
-    val lastUpdated: String = ""
-)
-
-sealed class InventoryOperationResult {
-    data class Success(val message: String) : InventoryOperationResult()
-    data class Error(val message: String) : InventoryOperationResult()
 } 

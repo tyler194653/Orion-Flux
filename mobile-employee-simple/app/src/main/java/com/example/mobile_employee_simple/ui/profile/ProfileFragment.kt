@@ -4,36 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.NavOptions
 import com.example.mobile_employee_simple.R
+import com.example.mobile_employee_simple.data.DataRepositoryProvider
 import com.example.mobile_employee_simple.databinding.FragmentProfileBinding
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
+import com.example.mobile_employee_simple.ui.base.BaseFragment
+import com.example.mobile_employee_simple.ui.base.LocaleDialogHelper
 import com.example.mobile_employee_simple.ui.settings.AboutDialogFragment
 import com.example.mobile_employee_simple.ui.settings.HelpDialogFragment
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    private val profileRepository = DataRepositoryProvider.userProfileRepository
 
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): FragmentProfileBinding {
+        return FragmentProfileBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val currentUser = LoginViewModel.getCurrentUser(requireContext()) ?: "员工用户"
-        binding.profileName.text = "$currentUser"
 
         binding.rowSettings.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.nav_settings)
@@ -48,24 +42,38 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            AlertDialog.Builder(requireContext())
-                .setTitle("确认退出")
-                .setMessage("确定要退出当前账号并返回登录界面吗？")
-                .setPositiveButton("退出登录") { _, _ ->
+            LocaleDialogHelper.showConfirmDialog(
+                context = requireContext(),
+                titleRes = R.string.profile_logout_confirm_title,
+                messageRes = R.string.profile_logout_confirm_message,
+                positiveRes = R.string.profile_logout,
+                negativeRes = R.string.cancel,
+                onPositive = {
                     LoginViewModel.logout(requireContext())
-                    Toast.makeText(requireContext(), "已退出登录", Toast.LENGTH_SHORT).show()
+                    showToast(R.string.profile_logged_out_toast)
                     val navOptions = NavOptions.Builder()
                         .setPopUpTo(R.id.mobile_navigation, true)
                         .build()
                     Navigation.findNavController(requireView()).navigate(R.id.nav_login, null, navOptions)
                 }
-                .setNegativeButton("取消", null)
-                .show()
+            )
         }
+
+        loadUserProfile()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onResume() {
+        super.onResume()
+        loadUserProfile()
+    }
+
+    private fun loadUserProfile() {
+        val defaultUser = getLocalizedString(R.string.profile_default_user)
+        val currentUser = LoginViewModel.getCurrentUser(requireContext()) ?: defaultUser
+        val profile = profileRepository.getUserProfile(currentUser)
+
+        binding.profileName.text = profile.username
+        binding.profileRole.text = profile.departmentAndRole
+        binding.profileEmpId.text = profile.employeeIdAndLevel
     }
 }

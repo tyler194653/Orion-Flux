@@ -154,4 +154,72 @@
     <!-- 产品图鉴页面 -->
     <string name="gallery_title">产品图鉴</string>
     <string name="gallery_description">这是产品图鉴页面</string>
+
+    <!-- 审批流界面 -->
+    <string name="approvals_title">企业审批流</string>
+    <string name="approvals_subtitle">高效流转采购、入库与物资申领工单</string>
+    <string name="approvals_btn_reject">驳回</string>
+    <string name="approvals_btn_approve">通过审批</string>
+    <string name="approval_status_pending">待审批</string>
+    <string name="approval_status_in_progress">流转中</string>
+    <string name="approval_status_completed">已通过</string>
+    <string name="approval_status_rejected">已驳回</string>
+    <string name="approvals_toast_approved">已通过审批: %s</string>
+    <string name="approvals_toast_rejected">已驳回工单: %s</string>
+
+    <!-- 个人中心 -->
+    <string name="profile_dept_role_default">供应链运营部 · 资深仓储主管</string>
+    <string name="profile_emp_id_default">工号: EMP202609 · 权限级别: L3</string>
+    <string name="profile_menu_settings">系统设置</string>
+    <string name="profile_menu_about">关于应用与版本</string>
+    <string name="profile_menu_help">帮助与操作指南</string>
+    <string name="profile_logout">退出登录</string>
+    <string name="profile_logout_confirm_title">确认退出</string>
+    <string name="profile_logout_confirm_message">确定要退出当前账号并返回登录界面吗？</string>
+    <string name="profile_logged_out_toast">已退出登录</string>
+    <string name="profile_default_user">员工用户</string>
+
+    <!-- AI 业务助手 -->
+    <string name="ai_chat_chip_stock_alert">⚠️ 库存预警</string>
+    <string name="ai_chat_chip_inventory_summary">📊 盘点汇总</string>
+    <string name="ai_chat_chip_batch_optimize">⚡ 路径优化</string>
+    <string name="ai_chat_chip_quality_check">🎯 质检分析</string>
+    <string name="ai_chat_input_hint">输入您的问题或指令...</string>
+    <string name="ai_chat_btn_send">发送</string>
+    <string name="ai_chat_bot_name">🤖 AI 助手</string>
+
+    <!-- 工作台弹窗 -->
+    <string name="workbench_task_dispatch_title">加急发运任务 #SO-9921</string>
+    <string name="workbench_task_dispatch_content">• 客户: 华东精密制造中心\n• 目标件数: 48 箱高强度连接件\n• 状态: 待装车复核 (高优先级)\n• 出库通道: Dock 03</string>
+    <string name="workbench_task_dispatch_btn_approvals">前往审批流处理</string>
+    <string name="workbench_task_dispatch_btn_start">开始复核</string>
+    <string name="workbench_task_dispatch_btn_later">稍后处理</string>
+    <string name="workbench_task_dispatch_toast">已分配装车工单并通知 Dock 03</string>
+    <string name="workbench_task_quality_title">零件质量抽检报告</string>
+    <string name="workbench_task_quality_content">• 批次号: 2026-B-88301\n• 抽检数量: 120 件\n• 合格率: 100% (公差均在 ±0.02mm 内)\n• 检验员: QA-07 (已签名确认)\n• 状态: 已归档</string>
+    <string name="workbench_task_quality_btn_view">查看报告详情</string>
+    <string name="workbench_task_quality_btn_close">关闭</string>
+    <string name="workbench_task_quality_toast">质检记录已上链同步至 ERP</string>
+    <string name="workbench_reports_summary">📊 今日概览:\n• 完成任务: 25 件\n• 进行中任务: 8 件\n• 待处理任务: 3 件\n\n📦 核心库存状况:\n• 轴承组 A: 1,420 套 (正常)\n• 传感器组件: 58 组 (⚠️ 低库存预警)\n• 传动皮带: 310 条 (正常)\n\n🎯 质量指标:\n• 综合合格率: 99.4%\n• 出库准时率: 98.8%</string>
+    <string name="workbench_task_inventory_check_toast">正在进入 A区-01 盘点任务...</string>
+
+    <!-- 库存项与图鉴详情 -->
+    <string name="inventory_search_hint">搜索产品名称或SKU</string>
+    <string name="inventory_item_default_name">产品名称</string>
+    <string name="inventory_item_default_qty">100 个</string>
+    <string name="inventory_item_status_sufficient">库存充足</string>
+    <string name="inventory_item_location_format">位置: %s</string>
+    <string name="inventory_item_update_format">更新: %s</string>
+    <string name="gallery_dialog_details_format">SKU: %1$s\n当前库存: %2$d %3$s\n库区货位: %4$s\n最后盘点: %5$s\n\n状态: 正常流转\n规格型号: 标准工业规格</string>
+    <string name="dialog_ok">确定</string>
+
+    <!-- 关于与帮助弹窗 -->
+    <string name="about_app_name">供应链员工端</string>
+    <string name="about_version">版本 1.0.0</string>
+    <string name="about_description">专业的供应链管理移动应用，为一线员工提供高效的工作工具。</string>
+    <string name="about_company">开发公司: Example Corp</string>
+    <string name="about_copyright">© 2026 Example Corp. All rights reserved.</string>
+    <string name="help_title">使用帮助</string>
+    <string name="help_content">1. 登录功能\n- 支持工号与测试账号登录\n- 支持生物识别快捷登录\n- 支持右上角实时中英文无缝切换\n\n2. 工作台\n- 审批流中心、产品图鉴、库存管理等业务流入口\n- 今日加急作业任务快速流转与质检报告核对\n- 数据报表概览\n\n3. 审批流与库存\n- 采购、货损、调拨等业务单据高效审批\n- 实时多语言支持\n\n如有问题，请联系系统管理员或技术支持。</string>
+    <string name="btn_close">关闭</string>
 </resources>

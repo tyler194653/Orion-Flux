@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -25,7 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="产品名称"
+                tools:text="Product Name"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface" />
@@ -34,7 +35,7 @@
                 android:id="@+id/item_sku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SKU: SKU001"
+                tools:text="SKU: SKU001"
                 android:textSize="14sp"
                 android:textColor="?attr/colorOnSurfaceVariant" />
         </LinearLayout>
@@ -51,14 +52,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="100 个"
+                tools:text="100 pcs"
                 android:textSize="16sp"
                 android:textColor="?attr/colorPrimary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="库存充足"
+                android:text="@string/inventory_item_status_sufficient"
                 android:textSize="12sp"
                 android:textColor="#4CAF50"
                 android:background="#E8F5E8"
@@ -77,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="位置: A区-01-01"
+                tools:text="Location: A-01-01"
                 android:textSize="12sp"
                 android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -85,7 +86,7 @@
                 android:id="@+id/item_last_updated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="更新: 2024-01-15"
+                tools:text="Updated: 2026-09-30"
                 android:textSize="12sp"
                 android:textColor="?attr/colorOnSurfaceVariant" />
         </LinearLayout>

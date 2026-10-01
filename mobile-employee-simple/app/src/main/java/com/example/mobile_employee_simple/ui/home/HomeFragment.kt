@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.mobile_employee_simple.R
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
+import com.example.mobile_employee_simple.utils.LanguageManager
 
 class HomeFragment : Fragment() {
 
@@ -45,19 +46,36 @@ class HomeFragment : Fragment() {
     }
 
     private fun showAiAssistantDialog() {
-        val options = arrayOf(
-            "⚠️ 查询当前库存预警",
-            "📋 推荐今日优先工作",
-            "🔍 快速盘点效率诊断"
-        )
+        val isZh = LanguageManager.isChinese(requireContext())
+        val options = if (isZh) {
+            arrayOf(
+                "⚠️ 查询当前库存预警",
+                "📋 推荐今日优先工作",
+                "🔍 快速盘点效率诊断"
+            )
+        } else {
+            arrayOf(
+                "⚠️ Check Low Stock Warnings",
+                "📋 Recommended Priorities for Today",
+                "🔍 Fast Stocktake Efficiency Check"
+            )
+        }
 
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.home_ai_assistant))
             .setItems(options) { _, which ->
-                val answer = when (which) {
-                    0 -> "🤖 【AI分析】产品B当前库存仅50箱，已触发低库存阈值，建议今日完成进货补仓。"
-                    1 -> "🤖 【AI推荐】检测到A区有批次产品变动，建议上午优先执行【A区库存盘点】任务。"
-                    else -> "🤖 【AI诊断】过去7天出入库核验准确率98.5%，扫码复核平均耗时12秒，状态良好。"
+                val answer = if (isZh) {
+                    when (which) {
+                        0 -> "🤖 【AI分析】减速齿轮箱当前库存仅45箱，已触发低库存阈值，建议今日在审批流提交采购补仓单。"
+                        1 -> "🤖 【AI推荐】检测到A区有精密轴承调拨，建议上午优先执行【A区-01】盘点任务。"
+                        else -> "🤖 【AI诊断】过去7天出入库核验准确率98.5%，扫码复核平均耗时12秒，状态优良。"
+                    }
+                } else {
+                    when (which) {
+                        0 -> "🤖 [AI Analysis] Gearbox stock is down to 45 boxes, reaching safety threshold. Replenishment request recommended."
+                        1 -> "🤖 [AI Recommendation] High turnover in Zone A; prioritize [Zone A-01] stocktaking this morning."
+                        else -> "🤖 [AI Diagnostics] 7-day inbound/outbound accuracy is 98.5%, avg verification 12s. Operating optimally."
+                    }
                 }
                 AlertDialog.Builder(requireContext())
                     .setTitle(options[which])

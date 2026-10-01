@@ -18,7 +18,7 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="返回"
+            android:text="@string/inventory_back"
             android:textColor="?attr/colorOnPrimary"
             android:background="?attr/selectableItemBackgroundBorderless" />
 
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="库存管理"
+            android:text="@string/inventory_title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnPrimary"
@@ -37,7 +37,7 @@
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="搜索"
+            android:text="@string/inventory_search"
             android:textColor="?attr/colorOnPrimary"
             android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="扫码入库"
+            android:text="@string/inventory_scan_in"
             android:layout_marginEnd="4dp"
             android:textSize="12sp" />
 
@@ -64,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="扫码出库"
+            android:text="@string/inventory_scan_out"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:textSize="12sp" />
@@ -74,7 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="库存盘点"
+            android:text="@string/inventory_check"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:textSize="12sp" />
@@ -84,7 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="货位管理"
+            android:text="@string/inventory_location_manage"
             android:layout_marginStart="4dp"
             android:textSize="12sp" />
     </LinearLayout>
@@ -101,7 +101,7 @@
             android:id="@+id/btn_refresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="刷新库存数据"
+            android:text="@string/inventory_refresh"
             android:textSize="14sp" />
     </LinearLayout>
 

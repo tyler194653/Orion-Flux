@@ -3,6 +3,8 @@ package com.example.mobile_employee_simple.utils
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
+import androidx.annotation.StringRes
+import com.example.mobile_employee_simple.MobileEmployeeApplication
 import java.util.Locale
 
 object LanguageManager {
@@ -26,7 +28,7 @@ object LanguageManager {
         }
     }
 
-    fun getCurrentLanguage(context: Context): String {
+    fun getCurrentLanguage(context: Context = MobileEmployeeApplication.instance): String {
         val appLocales = AppCompatDelegate.getApplicationLocales()
         if (!appLocales.isEmpty) {
             val tag = appLocales.get(0)?.toLanguageTag() ?: ""
@@ -37,7 +39,7 @@ object LanguageManager {
         return prefs.getString(KEY_LANGUAGE, LANGUAGE_ZH) ?: LANGUAGE_ZH
     }
 
-    fun isChinese(context: Context): Boolean {
+    fun isChinese(context: Context = MobileEmployeeApplication.instance): Boolean {
         return getCurrentLanguage(context) == LANGUAGE_ZH
     }
 
@@ -51,5 +53,14 @@ object LanguageManager {
         val nextLang = if (isChinese(context)) LANGUAGE_EN else LANGUAGE_ZH
         setLanguage(context, nextLang)
         return nextLang
+    }
+
+    fun getString(@StringRes resId: Int, vararg formatArgs: Any): String {
+        val context = MobileEmployeeApplication.instance
+        return if (formatArgs.isNotEmpty()) {
+            context.getString(resId, *formatArgs)
+        } else {
+            context.getString(resId)
+        }
     }
 }

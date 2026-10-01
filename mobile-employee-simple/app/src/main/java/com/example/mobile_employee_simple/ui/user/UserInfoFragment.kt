@@ -19,9 +19,10 @@ class UserInfoFragment : Fragment() {
         val userInfoText = view.findViewById<TextView>(R.id.user_info_text)
         val permissionText = view.findViewById<TextView>(R.id.permission_text)
         val context = requireContext()
-        val currentUser = LoginViewModel.getCurrentUser(context) ?: "未登录"
-        userInfoText.text = "当前用户：$currentUser"
-        permissionText.text = "权限：普通员工（示例）"
+        val notLoggedIn = getString(R.string.user_info_not_logged_in)
+        val currentUser = LoginViewModel.getCurrentUser(context) ?: notLoggedIn
+        userInfoText.text = getString(R.string.user_info_current_user, currentUser)
+        permissionText.text = getString(R.string.user_info_permission)
         return view
     }
-} 
+}

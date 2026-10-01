@@ -3,10 +3,15 @@ package com.example.mobile_employee_simple.ui.inventory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.mobile_employee_simple.data.DataRepositoryProvider
+import com.example.mobile_employee_simple.data.model.InventoryItem
+import com.example.mobile_employee_simple.data.model.InventoryOperationResult
+import com.example.mobile_employee_simple.utils.LanguageManager
 import kotlinx.coroutines.*
 
 class InventoryViewModel : ViewModel() {
     
+    private val repository = DataRepositoryProvider.inventoryRepository
     private val _inventoryItems = MutableLiveData<List<InventoryItem>>()
     val inventoryItems: LiveData<List<InventoryItem>> = _inventoryItems
     
@@ -26,19 +31,9 @@ class InventoryViewModel : ViewModel() {
             _isLoading.postValue(true)
             
             try {
-                delay(1000) // 模拟网络请求
-                
-                // 模拟库存数据
-                val items = listOf(
-                    InventoryItem("1", "产品A", "SKU001", 100, "个", "A区-01-01", "2024-01-15"),
-                    InventoryItem("2", "产品B", "SKU002", 50, "箱", "A区-01-02", "2024-01-14"),
-                    InventoryItem("3", "产品C", "SKU003", 200, "件", "B区-02-01", "2024-01-13"),
-                    InventoryItem("4", "产品D", "SKU004", 75, "包", "B区-02-02", "2024-01-12"),
-                    InventoryItem("5", "产品E", "SKU005", 120, "个", "C区-03-01", "2024-01-11")
-                )
-                
+                delay(300) // 模拟网络延迟
+                val items = repository.getInventoryItems()
                 _inventoryItems.postValue(items)
-                
             } catch (e: Exception) {
                 // 处理错误
             } finally {
@@ -60,20 +55,21 @@ class InventoryViewModel : ViewModel() {
             _isLoading.postValue(true)
             
             try {
-                delay(500) // 模拟处理延迟
-                
-                // TODO: 调用实际的入库API
+                delay(300)
                 val success = performStockIn(scanData)
-                
+                val isZh = LanguageManager.isChinese()
                 if (success) {
-                    _operationResult.postValue(InventoryOperationResult.Success("入库成功: ${scanData.productName}"))
+                    val msg = if (isZh) "入库成功: ${scanData.productName}" else "Stock In Success: ${scanData.productName}"
+                    _operationResult.postValue(InventoryOperationResult.Success(msg))
                     refreshInventoryData()
                 } else {
-                    _operationResult.postValue(InventoryOperationResult.Error("入库失败"))
+                    val msg = if (isZh) "入库失败" else "Stock In Failed"
+                    _operationResult.postValue(InventoryOperationResult.Error(msg))
                 }
-                
             } catch (e: Exception) {
-                _operationResult.postValue(InventoryOperationResult.Error("入库失败: ${e.message}"))
+                val isZh = LanguageManager.isChinese()
+                val prefix = if (isZh) "入库失败" else "Stock In Error"
+                _operationResult.postValue(InventoryOperationResult.Error("$prefix: ${e.message}"))
             } finally {
                 _isLoading.postValue(false)
             }
@@ -85,20 +81,21 @@ class InventoryViewModel : ViewModel() {
             _isLoading.postValue(true)
             
             try {
-                delay(500) // 模拟处理延迟
-                
-                // TODO: 调用实际的出库API
+                delay(300)
                 val success = performStockOut(scanData)
-                
+                val isZh = LanguageManager.isChinese()
                 if (success) {
-                    _operationResult.postValue(InventoryOperationResult.Success("出库成功: ${scanData.productName}"))
+                    val msg = if (isZh) "出库成功: ${scanData.productName}" else "Stock Out Success: ${scanData.productName}"
+                    _operationResult.postValue(InventoryOperationResult.Success(msg))
                     refreshInventoryData()
                 } else {
-                    _operationResult.postValue(InventoryOperationResult.Error("出库失败"))
+                    val msg = if (isZh) "出库失败" else "Stock Out Failed"
+                    _operationResult.postValue(InventoryOperationResult.Error(msg))
                 }
-                
             } catch (e: Exception) {
-                _operationResult.postValue(InventoryOperationResult.Error("出库失败: ${e.message}"))
+                val isZh = LanguageManager.isChinese()
+                val prefix = if (isZh) "出库失败" else "Stock Out Error"
+                _operationResult.postValue(InventoryOperationResult.Error("$prefix: ${e.message}"))
             } finally {
                 _isLoading.postValue(false)
             }
@@ -106,35 +103,21 @@ class InventoryViewModel : ViewModel() {
     }
     
     private suspend fun performStockIn(scanData: InventoryFragment.ScanData): Boolean {
-        // TODO: 实现实际的入库逻辑
+        // TODO: 预留接入实际数据库或API
         return true
     }
     
     private suspend fun performStockOut(scanData: InventoryFragment.ScanData): Boolean {
-        // TODO: 实现实际的出库逻辑
+        // TODO: 预留接入实际数据库或API
         return true
     }
     
     fun searchInventory(query: String) {
         scope.launch {
             _isLoading.postValue(true)
-            
             try {
-                delay(500) // 模拟搜索延迟
-                
-                val currentItems = _inventoryItems.value ?: emptyList()
-                val filteredItems = if (query.isEmpty()) {
-                    currentItems
-                } else {
-                    currentItems.filter { item ->
-                        item.name.contains(query, ignoreCase = true) ||
-                        item.sku.contains(query, ignoreCase = true) ||
-                        item.location.contains(query, ignoreCase = true)
-                    }
-                }
-                
-                _inventoryItems.postValue(filteredItems)
-                
+                val filtered = repository.searchInventory(query)
+                _inventoryItems.postValue(filtered)
             } catch (e: Exception) {
                 // 处理搜索错误
             } finally {
@@ -155,4 +138,4 @@ class InventoryViewModel : ViewModel() {
         super.onCleared()
         scope.cancel()
     }
-} 
+}

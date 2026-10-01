@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="企业审批流"
+        android:text="@string/approvals_title"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="?attr/colorOnSurface"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="高效流转采购、入库与物资申领工单"
+        android:text="@string/approvals_subtitle"
         android:textSize="13sp"
         android:textColor="?attr/colorOnSurfaceVariant"
         android:layout_marginBottom="12dp" />

@@ -154,4 +154,72 @@
     <!-- Gallery page -->
     <string name="gallery_title">Product Catalog</string>
     <string name="gallery_description">This is the product catalog page</string>
+
+    <!-- Approvals Screen -->
+    <string name="approvals_title">Enterprise Approvals</string>
+    <string name="approvals_subtitle">Streamlining procurement, inbound, and requisition orders</string>
+    <string name="approvals_btn_reject">Reject</string>
+    <string name="approvals_btn_approve">Approve</string>
+    <string name="approval_status_pending">Pending</string>
+    <string name="approval_status_in_progress">In Progress</string>
+    <string name="approval_status_completed">Approved</string>
+    <string name="approval_status_rejected">Rejected</string>
+    <string name="approvals_toast_approved">Approved request: %s</string>
+    <string name="approvals_toast_rejected">Rejected request: %s</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_dept_role_default">Supply Chain Operations · Senior Warehouse Lead</string>
+    <string name="profile_emp_id_default">Emp ID: EMP202609 · Level: L3</string>
+    <string name="profile_menu_settings">System Settings</string>
+    <string name="profile_menu_about">About &amp; Version</string>
+    <string name="profile_menu_help">Help &amp; Operations Guide</string>
+    <string name="profile_logout">Log Out</string>
+    <string name="profile_logout_confirm_title">Confirm Logout</string>
+    <string name="profile_logout_confirm_message">Are you sure you want to log out and return to the login screen?</string>
+    <string name="profile_logged_out_toast">Successfully logged out</string>
+    <string name="profile_default_user">Employee User</string>
+
+    <!-- AI Assistant -->
+    <string name="ai_chat_chip_stock_alert">⚠️ Stock Alert</string>
+    <string name="ai_chat_chip_inventory_summary">📊 Stocktake Summary</string>
+    <string name="ai_chat_chip_batch_optimize">⚡ Route Optimization</string>
+    <string name="ai_chat_chip_quality_check">🎯 QA Analysis</string>
+    <string name="ai_chat_input_hint">Enter your question or command...</string>
+    <string name="ai_chat_btn_send">Send</string>
+    <string name="ai_chat_bot_name">🤖 AI Assistant</string>
+
+    <!-- Workbench Dialogs -->
+    <string name="workbench_task_dispatch_title">Urgent Shipping Task #SO-9921</string>
+    <string name="workbench_task_dispatch_content">• Client: East China Precision Mfg\n• Target: 48 boxes high-strength fasteners\n• Status: Awaiting loading check (High Priority)\n• Outbound Bay: Dock 03</string>
+    <string name="workbench_task_dispatch_btn_approvals">Go to Approvals</string>
+    <string name="workbench_task_dispatch_btn_start">Start Review</string>
+    <string name="workbench_task_dispatch_btn_later">Later</string>
+    <string name="workbench_task_dispatch_toast">Assigned loading work order and notified Dock 03</string>
+    <string name="workbench_task_quality_title">Parts Quality Inspection Report</string>
+    <string name="workbench_task_quality_content">• Batch: 2026-B-88301\n• Sampled: 120 pcs\n• Pass Rate: 100% (Tolerance within ±0.02mm)\n• Inspector: QA-07 (Signed)\n• Status: Archived</string>
+    <string name="workbench_task_quality_btn_view">View Details</string>
+    <string name="workbench_task_quality_btn_close">Close</string>
+    <string name="workbench_task_quality_toast">QA record synchronized to ERP</string>
+    <string name="workbench_reports_summary">📊 Today\'s Overview:\n• Completed Tasks: 25\n• In Progress: 8\n• Pending: 3\n\n📦 Core Inventory:\n• Bearings Set A: 1,420 sets (Normal)\n• Sensor Units: 58 sets (⚠️ Low Stock Alert)\n• Drive Belts: 310 pcs (Normal)\n\n🎯 Quality Metrics:\n• Overall Pass Rate: 99.4%\n• On-time Dispatch: 98.8%</string>
+    <string name="workbench_task_inventory_check_toast">Entering Zone A-01 stocktake task...</string>
+
+    <!-- Inventory & Gallery -->
+    <string name="inventory_search_hint">Search product name or SKU</string>
+    <string name="inventory_item_default_name">Product Name</string>
+    <string name="inventory_item_default_qty">100 pcs</string>
+    <string name="inventory_item_status_sufficient">Sufficient Stock</string>
+    <string name="inventory_item_location_format">Location: %s</string>
+    <string name="inventory_item_update_format">Updated: %s</string>
+    <string name="gallery_dialog_details_format">SKU: %1$s\nCurrent Stock: %2$d %3$s\nLocation: %4$s\nLast Stocktake: %5$s\n\nStatus: Normal Flow\nSpec: Standard Industrial Spec</string>
+    <string name="dialog_ok">OK</string>
+
+    <!-- About & Help Dialogs -->
+    <string name="about_app_name">Mobile Employee Supply Chain</string>
+    <string name="about_version">Version 1.0.0</string>
+    <string name="about_description">Professional supply chain mobile app providing efficient tools for frontline workers.</string>
+    <string name="about_company">Developer: Example Corp</string>
+    <string name="about_copyright">© 2026 Example Corp. All rights reserved.</string>
+    <string name="help_title">User Guide</string>
+    <string name="help_content">1. Authentication\n- Supports ID and test account login\n- Supports biometric quick login\n- Instant bilingual switching at top right\n\n2. Workbench\n- Centralized access to Approvals, Product Catalog, Inventory, AI Assistant\n- Rapid review of urgent dispatch and quality inspection reports\n- Daily operational data reports\n\n3. Approvals &amp; Inventory\n- Efficient processing of procurement, damage, and transfer tickets\n- Real-time multilingual support\n\nFor support, contact your system administrator.</string>
+    <string name="btn_close">Close</string>
 </resources>

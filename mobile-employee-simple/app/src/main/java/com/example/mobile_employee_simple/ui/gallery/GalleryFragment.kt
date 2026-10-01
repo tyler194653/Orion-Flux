@@ -5,29 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mobile_employee_simple.R
+import com.example.mobile_employee_simple.data.model.InventoryItem
 import com.example.mobile_employee_simple.databinding.FragmentGalleryBinding
+import com.example.mobile_employee_simple.ui.base.BaseFragment
 import com.example.mobile_employee_simple.ui.inventory.InventoryAdapter
-import com.example.mobile_employee_simple.ui.inventory.InventoryItem
 
-class GalleryFragment : Fragment() {
+class GalleryFragment : BaseFragment<FragmentGalleryBinding>() {
 
-    private var _binding: FragmentGalleryBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var galleryViewModel: GalleryViewModel
     private lateinit var adapter: InventoryAdapter
 
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+        container: ViewGroup?
+    ): FragmentGalleryBinding {
+        return FragmentGalleryBinding.inflate(inflater, container, false)
+    }
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        galleryViewModel = ViewModelProvider(this)[GalleryViewModel::class.java]
 
         adapter = InventoryAdapter { item ->
             showProductDetailDialog(item)
@@ -40,24 +41,27 @@ class GalleryFragment : Fragment() {
             adapter.updateItems(items)
         }
 
-        return root
+        galleryViewModel.loadProducts()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        galleryViewModel.loadProducts()
     }
 
     private fun showProductDetailDialog(item: InventoryItem) {
+        val details = getLocalizedString(
+            R.string.gallery_dialog_details_format,
+            item.sku,
+            item.quantity,
+            item.unit,
+            item.location,
+            item.lastUpdated
+        )
         AlertDialog.Builder(requireContext())
             .setTitle(item.name)
-            .setMessage("SKU: ${item.sku}\n" +
-                    "当前库存: ${item.quantity} ${item.unit}\n" +
-                    "库区货位: ${item.location}\n" +
-                    "最后盘点: ${item.lastUpdated}\n\n" +
-                    "状态: 正常流转\n" +
-                    "规格型号: 标准工业规格")
-            .setPositiveButton("确定", null)
+            .setMessage(details)
+            .setPositiveButton(R.string.dialog_ok, null)
             .show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

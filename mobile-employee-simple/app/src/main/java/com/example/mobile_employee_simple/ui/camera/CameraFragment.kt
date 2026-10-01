@@ -35,7 +35,7 @@ class CameraFragment : Fragment() {
         if (isGranted) {
             openCamera()
         } else {
-            Toast.makeText(context, "需要相机权限才能拍照", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.camera_permission_required), Toast.LENGTH_SHORT).show()
         }
     }
     
@@ -90,7 +90,7 @@ class CameraFragment : Fragment() {
     }
     
     private fun showLoginRequired() {
-        Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.camera_login_required), Toast.LENGTH_SHORT).show()
         val loginFragment = LoginFragment()
         parentFragmentManager.commit {
             replace(R.id.nav_host_fragment_content_main, loginFragment)
@@ -138,11 +138,10 @@ class CameraFragment : Fragment() {
                 val photoUri = cameraViewModel.photoUri.value
                 
                 if (photoPath != null || photoUri != null) {
-                    // TODO: 处理照片，例如上传到服务器或保存到本地
-                    Toast.makeText(context, "照片已保存", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.camera_photo_saved), Toast.LENGTH_SHORT).show()
                     clearPhoto()
                 } else {
-                    Toast.makeText(context, "请先拍照或选择图片", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.camera_please_take_photo), Toast.LENGTH_SHORT).show()
                 }
             }
             
@@ -170,7 +169,7 @@ class CameraFragment : Fragment() {
         
         cameraViewModel.scanResult.observe(viewLifecycleOwner) { result ->
             if (result != null) {
-                binding.tvScanResult.text = "扫描结果: $result"
+                binding.tvScanResult.text = getString(R.string.camera_scan_result_format, result)
                 binding.tvScanResult.visibility = View.VISIBLE
             }
         }
@@ -181,7 +180,7 @@ class CameraFragment : Fragment() {
         if (intent != null) {
             cameraLauncher.launch(intent)
         } else {
-            Toast.makeText(context, "无法打开相机", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.camera_cannot_open), Toast.LENGTH_SHORT).show()
         }
     }
     
@@ -194,7 +193,7 @@ class CameraFragment : Fragment() {
         val integrator = IntentIntegrator.forSupportFragment(this)
         integrator.apply {
             setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-            setPrompt("将二维码放入框内扫描")
+            setPrompt(getString(R.string.camera_qr_scan_prompt))
             setCameraId(0)
             setBeepEnabled(true)
             setBarcodeImageEnabled(true)
@@ -213,7 +212,7 @@ class CameraFragment : Fragment() {
                 IntentIntegrator.UPC_A,
                 IntentIntegrator.UPC_E
             )
-            setPrompt("将条码放入框内扫描")
+            setPrompt(getString(R.string.camera_barcode_scan_prompt))
             setCameraId(0)
             setBeepEnabled(true)
             setBarcodeImageEnabled(true)
@@ -231,10 +230,10 @@ class CameraFragment : Fragment() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Toast.makeText(context, "扫描取消", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.camera_scan_canceled), Toast.LENGTH_SHORT).show()
             } else {
                 cameraViewModel.setScanResult(result.contents)
-                Toast.makeText(context, "扫描成功: ${result.contents}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.camera_scan_success, result.contents), Toast.LENGTH_SHORT).show()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
@@ -251,7 +250,7 @@ class CameraFragment : Fragment() {
             if (grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
                 openGallery()
             } else {
-                Toast.makeText(context, "需要存储权限才能选择图片", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.camera_storage_permission_required), Toast.LENGTH_SHORT).show()
             }
         }
     }

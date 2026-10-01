@@ -51,7 +51,7 @@
                     android:id="@+id/profile_role"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="供应链运营部 · 资深仓储主管"
+                    android:text="@string/profile_dept_role_default"
                     android:textSize="13sp"
                     android:textColor="@color/brand_secondary"
                     android:layout_marginBottom="4dp" />
@@ -60,7 +60,7 @@
                     android:id="@+id/profile_emp_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="工号: EMP202609 · 权限级别: L3"
+                    android:text="@string/profile_emp_id_default"
                     android:textSize="12sp"
                     android:textColor="?attr/colorOnSurfaceVariant" />
             </LinearLayout>
@@ -94,7 +94,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="系统设置"
+                        android:text="@string/profile_menu_settings"
                         android:textSize="15sp"
                         android:textColor="?attr/colorOnSurface" />
 
@@ -125,7 +125,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="关于应用与版本"
+                        android:text="@string/profile_menu_about"
                         android:textSize="15sp"
                         android:textColor="?attr/colorOnSurface" />
 
@@ -156,7 +156,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="帮助与操作指南"
+                        android:text="@string/profile_menu_help"
                         android:textSize="15sp"
                         android:textColor="?attr/colorOnSurface" />
 
@@ -178,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:strokeColor="@color/status_critical_text"
-            android:text="退出登录"
+            android:text="@string/profile_logout"
             android:textColor="@color/status_critical_text" />
 
     </LinearLayout>

@@ -10,7 +10,7 @@
         android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="欢迎使用供应链员工端"
+        android:text="@string/home_welcome"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp" />
@@ -19,7 +19,7 @@
         android:id="@+id/workbench_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="工作台"
+        android:text="@string/home_workbench"
         android:layout_marginBottom="16dp"
         android:padding="16dp" />
 
@@ -27,7 +27,7 @@
         android:id="@+id/ai_assistant_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AI助手"
+        android:text="@string/home_ai_assistant"
         android:padding="16dp" />
 
 </LinearLayout>

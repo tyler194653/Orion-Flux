@@ -9,7 +9,7 @@
         android:id="@+id/tv_help_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="使用帮助"
+        android:text="@string/help_title"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -24,7 +24,7 @@
             android:id="@+id/tv_help_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="帮助内容将在这里显示"
+            android:text="@string/help_content"
             android:textSize="14sp"
             android:lineSpacingExtra="4dp" />
 
@@ -34,6 +34,6 @@
         android:id="@+id/btn_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="关闭" />
+        android:text="@string/btn_close" />
 
 </LinearLayout> 

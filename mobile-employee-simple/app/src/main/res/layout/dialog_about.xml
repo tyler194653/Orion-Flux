@@ -9,7 +9,7 @@
         android:id="@+id/tv_app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="供应链员工端"
+        android:text="@string/about_app_name"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -19,7 +19,7 @@
         android:id="@+id/tv_version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="版本 1.0.0"
+        android:text="@string/about_version"
         android:textSize="16sp"
         android:gravity="center"
         android:layout_marginBottom="16dp" />
@@ -28,7 +28,7 @@
         android:id="@+id/tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="专业的供应链管理移动应用，为一线员工提供高效的工作工具。"
+        android:text="@string/about_description"
         android:textSize="14sp"
         android:gravity="center"
         android:layout_marginBottom="24dp" />
@@ -43,7 +43,7 @@
         android:id="@+id/tv_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="开发公司: Example Corp"
+        android:text="@string/about_company"
         android:textSize="14sp"
         android:gravity="center"
         android:layout_marginBottom="8dp" />
@@ -62,6 +62,6 @@
         android:id="@+id/btn_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="关闭" />
+        android:text="@string/btn_close" />
 
 </LinearLayout> 

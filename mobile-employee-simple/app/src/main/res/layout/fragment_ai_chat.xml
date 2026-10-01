@@ -32,7 +32,7 @@
                 android:insetBottom="0dp"
                 android:textSize="12sp"
                 android:textColor="?attr/colorOnSurface"
-                android:text="⚠️ 库存预警" />
+                android:text="@string/ai_chat_chip_stock_alert" />
 
             <Button
                 android:id="@+id/chip_inventory_summary"
@@ -44,7 +44,7 @@
                 android:insetBottom="0dp"
                 android:textSize="12sp"
                 android:textColor="?attr/colorOnSurface"
-                android:text="📊 盘点汇总" />
+                android:text="@string/ai_chat_chip_inventory_summary" />
 
             <Button
                 android:id="@+id/chip_batch_optimize"
@@ -56,7 +56,7 @@
                 android:insetBottom="0dp"
                 android:textSize="12sp"
                 android:textColor="?attr/colorOnSurface"
-                android:text="⚡ 路径优化" />
+                android:text="@string/ai_chat_chip_batch_optimize" />
 
             <Button
                 android:id="@+id/chip_quality_check"
@@ -67,7 +67,7 @@
                 android:insetBottom="0dp"
                 android:textSize="12sp"
                 android:textColor="?attr/colorOnSurface"
-                android:text="🎯 质检分析" />
+                android:text="@string/ai_chat_chip_quality_check" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -108,7 +108,7 @@
             android:background="@drawable/bg_chat_input"
             android:paddingStart="14dp"
             android:paddingEnd="14dp"
-            android:hint="输入您的问题或指令..."
+            android:hint="@string/ai_chat_input_hint"
             android:textColor="?attr/colorOnSurface"
             android:textColorHint="?attr/colorOnSurfaceVariant"
             android:textSize="14sp" />
@@ -119,7 +119,7 @@
             android:layout_height="42dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="@color/brand_secondary"
-            android:text="发送"
+            android:text="@string/ai_chat_btn_send"
             android:textColor="@color/white" />
     </LinearLayout>
 

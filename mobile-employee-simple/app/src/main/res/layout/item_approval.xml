@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
@@ -27,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="紧急采购补货申请"
+                tools:text="Procurement Request"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface" />
@@ -36,7 +37,7 @@
                 android:id="@+id/approval_status_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="待审批"
+                tools:text="Pending"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:background="@drawable/bg_badge_pending"
@@ -51,7 +52,7 @@
             android:id="@+id/approval_meta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="仓储一部 · 提交于 2026-09-30"
+            tools:text="Dept 1 · 2026-09-30"
             android:textSize="12sp"
             android:textColor="?attr/colorOnSurfaceVariant"
             android:layout_marginBottom="8dp" />
@@ -61,7 +62,7 @@
             android:id="@+id/approval_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="申请补充 SKU002 (减速齿轮箱总成) 50 箱，预算 ¥24,500。"
+            tools:text="Replenishment description"
             android:textSize="14sp"
             android:textColor="?attr/colorOnSurface"
             android:layout_marginBottom="12dp" />
@@ -84,7 +85,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:text="驳回"
+                android:text="@string/approvals_btn_reject"
                 android:textColor="@color/status_critical_text"
                 android:layout_marginEnd="8dp" />
 
@@ -94,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:backgroundTint="@color/brand_secondary"
-                android:text="通过审批"
+                android:text="@string/approvals_btn_approve"
                 android:textColor="@color/white" />
         </LinearLayout>
 
