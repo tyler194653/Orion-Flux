@@ -51,6 +51,17 @@ class LoginFragment : Fragment() {
     
     private fun setupUI() {
         binding.apply {
+            // 中英文切换按钮
+            btnLanguageSwitch.setOnClickListener {
+                val newLang = com.example.mobile_employee_simple.utils.LanguageManager.toggleLanguage(requireContext())
+                val message = if (newLang == com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_ZH) {
+                    getString(R.string.language_switched_zh)
+                } else {
+                    getString(R.string.language_switched_en)
+                }
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+
             // 登录按钮
             loginButton.setOnClickListener {
                 performLogin()
@@ -82,7 +93,7 @@ class LoginFragment : Fragment() {
         loginViewModel.loginResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is LoginResult.Success -> {
-                    Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.login_success), Toast.LENGTH_SHORT).show()
                     // 启用侧边导航
                     (activity as? MainActivity)?.enableNavigationAfterLogin()
                     showHome()
@@ -105,7 +116,7 @@ class LoginFragment : Fragment() {
         val password = binding.passwordEditText.text.toString()
 
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(context, "请输入用户名和密码", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.login_empty_input_warning), Toast.LENGTH_SHORT).show()
             return
         }
 

@@ -31,16 +31,17 @@
                     android:id="@+id/workbench_welcome_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="您好，仓储主管"
+                    android:text="@string/workbench_welcome_format"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
+                    android:id="@+id/workbench_sub_greeting_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="今日仓库运转正常 · 共有 4 项待办任务"
+                    android:text="@string/workbench_sub_greeting"
                     android:textSize="13sp"
                     android:textColor="@color/slate_300" />
             </LinearLayout>
@@ -50,13 +51,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="业务快速入口"
+            android:text="@string/workbench_quick_access"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnSurface"
             android:layout_marginBottom="12dp" />
 
-        <!-- 2x2 Operations Grid -->
+        <!-- 3x2 Operations Grid -->
+        <!-- Row 1: Inventory & Camera -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +93,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="库存管理"
+                        android:text="@string/workbench_inventory"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface" />
@@ -99,7 +101,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="入库/出库/盘点"
+                        android:text="@string/workbench_inventory_desc"
                         android:textSize="11sp"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -133,7 +135,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="扫码拍照"
+                        android:text="@string/workbench_camera"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface" />
@@ -141,13 +143,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="条码识别/留证"
+                        android:text="@string/workbench_camera_desc"
                         android:textSize="11sp"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
+        <!-- Row 2: Catalog & Approvals -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -182,7 +185,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/menu_gallery"
+                        android:text="@string/workbench_catalog"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface" />
@@ -190,7 +193,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="物料标准与规格"
+                        android:text="@string/workbench_catalog_desc"
                         android:textSize="11sp"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -239,6 +242,7 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
+        <!-- Row 3: Reports & AI Assistant -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -281,7 +285,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="KPI/出入库统计"
+                        android:text="@string/workbench_reports_desc"
                         android:textSize="11sp"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -334,7 +338,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="今日作业任务"
+            android:text="@string/workbench_tasks_title"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnSurface"
@@ -367,7 +371,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A区-01 货架精密轴承盘点"
+                        android:text="@string/task_inventory_check_title"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface" />
@@ -375,7 +379,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="点击进入库存管理快速盘点"
+                        android:text="@string/task_inventory_check_desc"
                         android:textSize="12sp"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -383,7 +387,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="进行中"
+                    android:text="@string/status_in_progress"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:background="@drawable/bg_badge_in_progress"
@@ -422,7 +426,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="加急订单 #SO-9921 出库发运"
+                        android:text="@string/task_order_dispatch_title"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface" />
@@ -430,7 +434,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="待装车复核 · 优先级: 高"
+                        android:text="@string/task_order_dispatch_desc"
                         android:textSize="12sp"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -438,7 +442,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待处理"
+                    android:text="@string/status_pending"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:background="@drawable/bg_badge_pending"
@@ -476,7 +480,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="B批次进厂零件质量抽检"
+                        android:text="@string/task_quality_check_title"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface" />
@@ -484,7 +488,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="合格率 100% · 已归档"
+                        android:text="@string/task_quality_check_desc"
                         android:textSize="12sp"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -492,7 +496,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="已完成"
+                    android:text="@string/status_completed"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:background="@drawable/bg_badge_completed"

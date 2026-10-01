@@ -6,6 +6,8 @@
     <string name="nav_header_subtitle">employee@company.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="action_user_info">User Info</string>
+    <string name="action_language">Switch Language</string>
 
     <!-- Menu items -->
     <string name="menu_workbench">Workbench</string>
@@ -18,9 +20,11 @@
     <string name="menu_ai_chat">AI Chat</string>
     <string name="menu_approvals">Approvals</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_system_group">System Settings</string>
 
     <!-- Login screen -->
     <string name="login_title">Supply Chain Employee</string>
+    <string name="login_subtitle">Intelligent Warehousing &amp; Logistics Platform</string>
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button">Login</string>
@@ -28,12 +32,20 @@
     <string name="login_biometric">Fingerprint/Face Recognition</string>
     <string name="login_qr">QR Code Login</string>
     <string name="login_employee_id">Employee ID Login</string>
-    <string name="login_language_switch">中文/English</string>
+    <string name="login_language_toggle">EN / 中</string>
+    <string name="login_language_switch">English / 中文</string>
+    <string name="login_empty_input_warning">Please enter username and password</string>
+    <string name="login_success">Login successful</string>
+    <string name="login_failed">Incorrect username or password</string>
 
     <!-- User info -->
     <string name="user_info">User Info</string>
+    <string name="user_info_current_user">Current User: %s</string>
+    <string name="user_info_permission">Permission: Regular Employee (Example)</string>
+    <string name="user_info_not_logged_in">Not Logged In</string>
     <string name="logout">Logout</string>
     <string name="logout_success">Logged out successfully</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Home -->
     <string name="home_welcome">Welcome to Supply Chain Employee</string>
@@ -44,28 +56,47 @@
 
     <!-- Workbench -->
     <string name="workbench_title">Workbench</string>
-    <string name="workbench_task_list">Task List</string>
+    <string name="workbench_welcome_format">Hello, %s</string>
+    <string name="workbench_welcome_default_role">Supervisor</string>
+    <string name="workbench_sub_greeting">Warehouse running normally · 4 pending tasks</string>
+    <string name="workbench_quick_access">Quick Operations</string>
     <string name="workbench_inventory">Inventory Management</string>
+    <string name="workbench_inventory_desc">Inbound / Outbound / Audit</string>
     <string name="workbench_camera">Scan &amp; Camera</string>
-    <string name="workbench_reports">Data Reports</string>
+    <string name="workbench_camera_desc">Barcode &amp; Evidence</string>
+    <string name="workbench_catalog">Product Catalog</string>
+    <string name="workbench_catalog_desc">Material Specs &amp; Standards</string>
     <string name="workbench_approvals">Approvals Center</string>
     <string name="workbench_approvals_desc">Purchase &amp; Dispatch</string>
+    <string name="workbench_reports">Data Reports</string>
+    <string name="workbench_reports_desc">KPI &amp; Volume Stats</string>
     <string name="workbench_ai_assistant">AI Assistant</string>
     <string name="workbench_ai_assistant_desc">Alerts &amp; Diagnostics</string>
+    <string name="workbench_tasks_title">Today\'s Operations</string>
+    <string name="task_inventory_check_title">Zone A-01 Precision Bearing Audit</string>
+    <string name="task_inventory_check_desc">Tap to enter inventory quick audit</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="task_order_dispatch_title">Urgent Order #SO-9921 Outbound</string>
+    <string name="task_order_dispatch_desc">Pending loading review · High priority</string>
+    <string name="status_pending">Pending</string>
+    <string name="task_quality_check_title">Batch B Inbound Parts Quality Check</string>
+    <string name="task_quality_check_desc">Pass rate 100% · Archived</string>
+    <string name="status_completed">Completed</string>
     <string name="workbench_task_list_developing">Task List</string>
     <string name="workbench_reports_developing">Data Reports</string>
     <string name="workbench_inventory_developing">Inventory</string>
     <string name="workbench_login_required">Please login first</string>
-    <string name="menu_system_group">System Settings</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
+    <string name="settings_language">Language Settings</string>
+    <string name="settings_language_desc">Current Language: %s</string>
     <string name="settings_notification">Notification Settings</string>
     <string name="settings_privacy">Privacy Settings</string>
     <string name="settings_sync">Data Sync Settings</string>
     <string name="settings_app_info">App Info</string>
     <string name="settings_help_feedback">Help &amp; Feedback</string>
-    <string name="settings_about">About</string>
+    <string name="settings_about">About App</string>
     <string name="settings_version">Version %s</string>
     <string name="settings_privacy_developing">Privacy settings feature is under development</string>
     <string name="settings_sync_developing">Data sync settings feature is under development</string>
@@ -77,11 +108,11 @@
     <string name="settings_feedback_subject">Supply Chain Employee App Feedback</string>
     <string name="settings_feedback_content">Please describe your issue or suggestion here:\n\nApp Version: %1$s\nDevice Info: %2$s\nSystem Version: Android %3$s\n\nFeedback:\n\n</string>
     <string name="settings_no_email_app">No email app found, please send email manually to support@supplychain.com</string>
-
-    <!-- User Info -->
-    <string name="user_info_current_user">Current User: %s</string>
-    <string name="user_info_permission">Permission: Regular Employee (Example)</string>
-    <string name="user_info_not_logged_in">Not Logged In</string>
+    <string name="language_dialog_title">Select Language / 选择语言</string>
+    <string name="language_zh_cn">Simplified Chinese (简体中文)</string>
+    <string name="language_en">English</string>
+    <string name="language_switched_zh">Switched to Simplified Chinese</string>
+    <string name="language_switched_en">Switched to English</string>
 
     <!-- Inventory -->
     <string name="inventory_title">Inventory Management</string>
@@ -121,6 +152,6 @@
     <string name="camera_login_required">Please login first</string>
 
     <!-- Gallery page -->
-    <string name="gallery_title">Product Gallery</string>
-    <string name="gallery_description">This is the product gallery page</string>
-</resources> 
+    <string name="gallery_title">Product Catalog</string>
+    <string name="gallery_description">This is the product catalog page</string>
+</resources>

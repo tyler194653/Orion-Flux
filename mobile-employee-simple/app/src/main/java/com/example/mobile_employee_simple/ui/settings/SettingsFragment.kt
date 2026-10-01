@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.mobile_employee_simple.R
 import com.example.mobile_employee_simple.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -34,6 +35,11 @@ class SettingsFragment : Fragment() {
     
     private fun setupUI() {
         binding.apply {
+            // 语言设置
+            btnLanguageSettings.setOnClickListener {
+                showLanguageSelectDialog()
+            }
+
             // 通知设置按钮 - 跳转到系统通知设置
             btnNotificationSettings.setOnClickListener {
                 openNotificationSettings()
@@ -145,6 +151,37 @@ class SettingsFragment : Fragment() {
             .show()
     }
     
+    private fun showLanguageSelectDialog() {
+        val languages = arrayOf(
+            getString(R.string.language_zh_cn),
+            getString(R.string.language_en)
+        )
+        val currentLang = com.example.mobile_employee_simple.utils.LanguageManager.getCurrentLanguage(requireContext())
+        val checkedItem = if (currentLang == com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_ZH) 0 else 1
+
+        android.app.AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.language_dialog_title))
+            .setSingleChoiceItems(languages, checkedItem) { dialog, which ->
+                val targetLang = if (which == 0) {
+                    com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_ZH
+                } else {
+                    com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_EN
+                }
+                dialog.dismiss()
+                if (targetLang != currentLang) {
+                    com.example.mobile_employee_simple.utils.LanguageManager.setLanguage(requireContext(), targetLang)
+                    val msg = if (targetLang == com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_ZH) {
+                        getString(R.string.language_switched_zh)
+                    } else {
+                        getString(R.string.language_switched_en)
+                    }
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
+
     private fun getAppVersion(): String {
         return try {
             val packageInfo = requireContext().packageManager.getPackageInfo(
@@ -158,7 +195,7 @@ class SettingsFragment : Fragment() {
     }
     
     private fun updateVersionInfo() {
-        binding.tvVersion.text = "版本 ${getAppVersion()}"
+        binding.tvVersion.text = getString(R.string.settings_version, getAppVersion())
     }
     
     override fun onDestroyView() {

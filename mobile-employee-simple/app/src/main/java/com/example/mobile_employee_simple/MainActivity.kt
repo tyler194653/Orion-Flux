@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         
         try {
+            // 初始化语言设置，确保默认优先 Simplified Chinese 并响应持久化配置
+            com.example.mobile_employee_simple.utils.LanguageManager.init(this)
+
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
@@ -192,6 +195,10 @@ class MainActivity : AppCompatActivity() {
                 showUserInfoDialog()
                 true
             }
+            R.id.action_language -> {
+                showLanguageDialog()
+                true
+            }
             R.id.action_settings -> {
                 getNavController().navigate(R.id.nav_settings)
                 true
@@ -199,35 +206,68 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun showLanguageDialog() {
+        val languages = arrayOf(
+            getString(R.string.language_zh_cn),
+            getString(R.string.language_en)
+        )
+        val currentLang = com.example.mobile_employee_simple.utils.LanguageManager.getCurrentLanguage(this)
+        val checkedItem = if (currentLang == com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_ZH) 0 else 1
+
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.language_dialog_title))
+            .setSingleChoiceItems(languages, checkedItem) { dialog, which ->
+                val targetLang = if (which == 0) {
+                    com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_ZH
+                } else {
+                    com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_EN
+                }
+                dialog.dismiss()
+                if (targetLang != currentLang) {
+                    com.example.mobile_employee_simple.utils.LanguageManager.setLanguage(this, targetLang)
+                    val msg = if (targetLang == com.example.mobile_employee_simple.utils.LanguageManager.LANGUAGE_ZH) {
+                        getString(R.string.language_switched_zh)
+                    } else {
+                        getString(R.string.language_switched_en)
+                    }
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
     
     private fun showUserInfoDialog() {
-        val currentUser = LoginViewModel.getCurrentUser(this) ?: "用户"
+        val currentUser = LoginViewModel.getCurrentUser(this) ?: getString(R.string.default_user)
         val isLoggedIn = LoginViewModel.isLoggedIn(this)
         
         if (isLoggedIn) {
-            val options = arrayOf("当前用户: $currentUser", "退出登录")
+            val userLabel = getString(R.string.user_info_current_user, currentUser)
+            val logoutLabel = getString(R.string.logout)
+            val options = arrayOf(userLabel, logoutLabel)
             AlertDialog.Builder(this)
-                .setTitle("用户信息")
+                .setTitle(getString(R.string.user_info))
                 .setItems(options) { _, which ->
                     when (which) {
                         0 -> {
-                            Toast.makeText(this, "当前用户: $currentUser", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, userLabel, Toast.LENGTH_SHORT).show()
                         }
                         1 -> {
                             logout()
                         }
                     }
                 }
-                .setNegativeButton("取消", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show()
         } else {
-            Toast.makeText(this, "未登录", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.user_info_not_logged_in), Toast.LENGTH_SHORT).show()
         }
     }
     
     private fun logout() {
         LoginViewModel.logout(this)
-        Toast.makeText(this, "已退出登录", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.logout_success), Toast.LENGTH_SHORT).show()
         
         val navController = getNavController()
         val navOptions = NavOptions.Builder()

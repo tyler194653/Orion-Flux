@@ -35,8 +35,9 @@ class WorkbenchFragment : Fragment() {
             return
         }
 
-        val currentUser = LoginViewModel.getCurrentUser(requireContext()) ?: "仓储主管"
-        binding.workbenchWelcomeText.text = "您好，$currentUser"
+        val defaultRole = getString(R.string.workbench_welcome_default_role)
+        val currentUser = LoginViewModel.getCurrentUser(requireContext()) ?: defaultRole
+        binding.workbenchWelcomeText.text = getString(R.string.workbench_welcome_format, currentUser)
 
         // 2x2 业务卡片点击事件
         // 1. 库存管理
