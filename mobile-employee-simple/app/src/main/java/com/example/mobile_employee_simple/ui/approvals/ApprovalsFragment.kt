@@ -17,6 +17,7 @@ import com.example.mobile_employee_simple.R
 import com.example.mobile_employee_simple.data.DataRepositoryProvider
 import com.example.mobile_employee_simple.data.model.ApprovalItem
 import com.example.mobile_employee_simple.data.model.ApprovalStatus
+import com.example.mobile_employee_simple.data.repository.ApprovalsRepository
 import com.example.mobile_employee_simple.databinding.FragmentApprovalsBinding
 import com.example.mobile_employee_simple.ui.auth.LoginViewModel
 import com.example.mobile_employee_simple.ui.base.BaseFragment
@@ -114,6 +115,22 @@ class ApprovalsFragment : BaseFragment<FragmentApprovalsBinding>() {
                     val success = repository.withdrawApproval(item.id)
                     if (success) {
                         item.status = ApprovalStatus.WITHDRAWN
+                        val isZh = isChinese()
+                        if (isZh) {
+                            if (!item.details.contains("撤回说明")) {
+                                item.details = "${item.details}\n【撤回说明】申请人已主动撤回该申请"
+                            }
+                            if (!item.timeline.contains("撤回")) {
+                                item.timeline = "${item.timeline} ➔ 员工主动撤回申请"
+                            }
+                        } else {
+                            if (!item.details.contains("Withdrawal Note") && !item.details.contains("Withdrawal Reason")) {
+                                item.details = "${item.details}\n[Withdrawal Note] Withdrawn by applicant"
+                            }
+                            if (!item.timeline.contains("Withdrawn")) {
+                                item.timeline = "${item.timeline} ➔ Withdrawn by applicant"
+                            }
+                        }
                         adapter.notifyItemChanged(position)
                         showToast(getLocalizedString(R.string.toast_withdraw_success))
                     }
@@ -135,6 +152,34 @@ class ApprovalsFragment : BaseFragment<FragmentApprovalsBinding>() {
             .setCancelable(true)
             .create()
 
+        fun updateTemplate(rbId: Int) {
+            val isZh = isChinese()
+            when (rbId) {
+                R.id.rb_type_supplies -> {
+                    etTitle.setText(if (isZh) "工器具与防护耗材申领" else "Supplies & PPE Requisition")
+                    etDesc.setText(if (isZh) "申领手持工业扫码枪 1 台及防静电劳保手套，用于盘点作业。" else "Requisition for handheld barcode scanner and PPE gloves for inventory operations.")
+                }
+                R.id.rb_type_overtime -> {
+                    etTitle.setText(if (isZh) "月末大盘点延时加班调休申请" else "Cycle Count Overtime Comp Time Request")
+                    etDesc.setText(if (isZh) "申请延时加班工时折算存入个人调休假期账户。" else "Overtime work compensatory time application for warehouse cycle counting.")
+                }
+                R.id.rb_type_reimbursement -> {
+                    etTitle.setText(if (isZh) "紧急外勤差旅与交通费报销" else "Emergency Transport & Expense Claim")
+                    etDesc.setText(if (isZh) "紧急跨库调拨打车费用发票报销申请。" else "Out-of-pocket transportation expense claim with receipts attached.")
+                }
+                R.id.rb_type_incident -> {
+                    etTitle.setText(if (isZh) "进料上架外箱微损异常报备" else "Inbound Damaged Cargo Incident Report")
+                    etDesc.setText(if (isZh) "货物上架复核发现外包装破损异常，已贴隔离标并拍照留存。" else "Outer package minor damage exception report with isolation photos filed.")
+                }
+            }
+        }
+
+        updateTemplate(rgType.checkedRadioButtonId)
+
+        rgType.setOnCheckedChangeListener { _, checkedId ->
+            updateTemplate(checkedId)
+        }
+
         btnCancel.setOnClickListener {
             dialog.dismiss()
         }
@@ -149,33 +194,26 @@ class ApprovalsFragment : BaseFragment<FragmentApprovalsBinding>() {
             }
 
             val checkedRbId = rgType.checkedRadioButtonId
-            val selectedRb = dialogView.findViewById<RadioButton>(checkedRbId)
-            val categoryName = selectedRb?.text?.toString() ?: getLocalizedString(R.string.dialog_new_request_type_supplies)
+            val categoryType = when (checkedRbId) {
+                R.id.rb_type_supplies -> "supplies"
+                R.id.rb_type_overtime -> "overtime"
+                R.id.rb_type_reimbursement -> "reimbursement"
+                R.id.rb_type_incident -> "incident"
+                else -> "supplies"
+            }
 
             val currentUser = LoginViewModel.getCurrentUser(requireContext()) ?: "test"
-            val nowStr = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
-            val dateTag = SimpleDateFormat("HHmm", Locale.getDefault()).format(Date())
-            val newId = "REQ-2026-$dateTag"
-
-            val newItem = ApprovalItem(
-                id = newId,
-                title = titleText,
-                meta = "$categoryName · ${getLocalizedString(R.string.inventory_item_update_format, nowStr)}",
-                desc = descText,
-                status = ApprovalStatus.PENDING,
-                category = categoryName,
-                details = if (isChinese()) {
-                    "【申请单号】$newId\n【申请人】$currentUser\n【申请类别】$categoryName\n【申请事由】$titleText\n【详细说明】$descText\n【提交时间】$nowStr\n【审批节点】待直属主管初审"
-                } else {
-                    "[Request ID] $newId\n[Applicant] $currentUser\n[Category] $categoryName\n[Title] $titleText\n[Details] $descText\n[Submitted At] $nowStr\n[Node] Pending Supervisor Review"
-                },
-                approver = if (isChinese()) "直属主管" else "Direct Supervisor",
-                timeline = "$nowStr ${if (isChinese()) "员工提交申请 ➔ 待初审" else "Submitted by employee ➔ Pending review"}"
+            val bilingualItem = ApprovalsRepository.createBilingualRequest(
+                categoryType = categoryType,
+                userTitle = titleText,
+                userDesc = descText,
+                applicant = currentUser
             )
 
             viewLifecycleOwner.lifecycleScope.launch {
-                repository.submitApproval(newItem)
-                items.add(0, newItem)
+                repository.submitApproval(bilingualItem)
+                val displayItem = bilingualItem.localized(isChinese())
+                items.add(0, displayItem)
                 adapter.notifyItemInserted(0)
                 binding.approvalsRecyclerView.scrollToPosition(0)
                 dialog.dismiss()
